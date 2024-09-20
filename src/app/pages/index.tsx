@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Header from "./components/Header";
-import Services from "./components/Services";
-import AboutUs from "./components/AboutUs";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Services from "../components/Services";
+import AboutUs from "../components/AboutUs";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
