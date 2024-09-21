@@ -19,7 +19,7 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-60">
+      <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-70">
         <Header />
         <AboutUs />
         <Services />
