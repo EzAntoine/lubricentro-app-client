@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-hero-image min-h-screen bg-cover bg-center bg-[#2d2c2d] bg-opacity-80">
+    <div className="bg-hero-image min-h-screen bg-cover bg-center">
       <Head>
         <title>Lubricentro Maceratesi</title>
         <meta name="Lubricentro Maceratesi" content="" />
@@ -19,7 +19,7 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex min-h-screen flex-col">
+      <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-60">
         <Header />
         <AboutUs />
         <Services />
