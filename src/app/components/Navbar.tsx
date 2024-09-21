@@ -55,7 +55,10 @@ export default function NavBar() {
         <div className='menu hidden md:block md:w-auto" id="navbar"'>
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-9 mt-0 items-center">
             {navLinks.map((link, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                className="hover:text-gray-200 hover:underline hover:underline-offset-8 hover:decoration-2 hover:translate-y-0.5"
+              >
                 <NavLink href={link.path} title={link.title} />
               </li>
             ))}
