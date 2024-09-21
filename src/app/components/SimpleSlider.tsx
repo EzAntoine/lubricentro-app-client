@@ -10,11 +10,13 @@ export default function SimpleSlider() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 50,
+    speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: "0px",
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
   return (
     <Slider {...settings}>
@@ -22,21 +24,21 @@ export default function SimpleSlider() {
         <Image
           src={lubricanteImg}
           alt="Lubricante"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-md"
         />
       </div>
       <div className="flex items-center h-full">
         <Image
           src={motorImg}
           alt="Motor"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-md"
         />
       </div>
       <div className="flex items-center h-full">
         <Image
           src={varillaImg}
           alt="Varilla"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-md"
         />
       </div>
     </Slider>
