@@ -2,7 +2,7 @@ export default function AboutUs() {
   return (
     <section className="text-gray-300 w-full p-8" id="aboutus">
       <div>
-        <h2 className="text-left text-4xl font-bold text-white mt-4 mb-4 md:mb-12">
+        <h2 className="text-left text-4xl font-bold text-white mt-8 mb-8 md:mb-12">
           Sobre Nosotros
         </h2>
         <p className="text-[#a8aeb3] text-base sm:text-lg mb-6 lg:text-xl px-24 text-balance">
