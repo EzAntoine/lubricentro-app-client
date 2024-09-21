@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "hero-image": "url('/images/herramientas.jpg')",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
