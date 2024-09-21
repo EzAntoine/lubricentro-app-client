@@ -16,7 +16,7 @@ export default function SimpleSlider() {
     centerMode: true,
     centerPadding: "0px",
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
   };
   return (
     <Slider {...settings}>
