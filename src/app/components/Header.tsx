@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center py-8">
       <NavBar />
-      <div className="w-full md:w-2/3 h-1/3 my-8 max-w-screen-md relative">
+      <div className="w-full md:w-2/3 h-1/3 py-8 max-w-screen-md relative">
         <SimpleSlider />
       </div>
     </div>
