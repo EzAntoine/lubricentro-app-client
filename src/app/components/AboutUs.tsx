@@ -1,7 +1,7 @@
 export default function AboutUs() {
   return (
-    <section>
-      <div className="w-full p-16 bg-[#e94c3d] bg-opacity-20" id="aboutus">
+    <section id="aboutus">
+      <div className="w-full p-16 bg-[#e94c3d] bg-opacity-20">
         <h2 className="text-left text-4xl font-bold text-white md:mb-12">
           Sobre Nosotros
         </h2>
