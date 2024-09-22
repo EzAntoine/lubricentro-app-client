@@ -1,3 +1,10 @@
+import walogo from "../../../public/svg/whatsapp-color.svg";
+import fblogo from "../../../public/svg/facebook-round.svg";
+import iglogo from "../../../public/svg/instagram-round.svg";
+import maillogo from "../../../public/svg/email-round.svg";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Contact() {
   return (
     <section id="contact">
@@ -6,13 +13,51 @@ export default function Contact() {
           Contacto
         </h2>
         <div className="text-gray-300 font-bold text-base sm:text-lg mb-6 lg:text-xl px-24 text-balance">
-          <span>Escribinos por Whatsapp BOTON</span>
+          <Link href="wa.me/+542911111111" className="flex items-center">
+            <h3 className="text-2xl">Escribinos por Whatsapp</h3>
+            <Image
+              src={walogo}
+              alt="Whatsapp +542911111111"
+              title="Whatsapp +542911111111"
+              className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out mx-6"
+            />
+          </Link>
           <h3 className="text-2xl mt-4">Redes Sociales</h3>
           <div className="container mx-auto flex flex-col items-center">
             <ul className="flex space-x-4">
-              <li>LOGO lubricentro@gmail.com</li>
-              <li>LOGO @Instagram</li>
-              <li>LOGO TikTok</li>
+              <Link href="mailto:lubricentro@gmail.com" className="mx-4">
+                <li className="flex items-center">
+                  <Image
+                    src={maillogo}
+                    alt="Email"
+                    title="lubricentro@gmail.com"
+                    className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+                  />
+                  lubricentro@gmail.com
+                </li>
+              </Link>
+              <Link href="https://instagram.com/lubricentro" className="mx-4">
+                <li className="flex items-center">
+                  <Image
+                    src={iglogo}
+                    alt="Instagram @lubricentro"
+                    title="Instagram @lubricentro"
+                    className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out mr-1"
+                  />
+                  @Instagram
+                </li>
+              </Link>
+              <Link href="https://facebook.com/lubricentro" className="mx-4">
+                <li className="flex items-center">
+                  <Image
+                    src={fblogo}
+                    alt="Facebook"
+                    title="Facebook"
+                    className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+                  />
+                  Facebook
+                </li>
+              </Link>
             </ul>
           </div>
           <h3 className="text-2xl mt-4">Ubicacion</h3>
