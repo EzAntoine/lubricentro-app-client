@@ -42,7 +42,7 @@ export default function Contact() {
                     src={iglogo}
                     alt="Instagram @lubricentro"
                     title="Instagram @lubricentro"
-                    className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out mr-1"
+                    className="w-9 h-9 transform hover:scale-110 transition-transform duration-300 ease-in-out mr-1"
                   />
                   @Instagram
                 </li>
