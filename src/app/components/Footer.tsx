@@ -19,7 +19,7 @@ export default function Footer() {
                 src={maillogo}
                 alt="Email"
                 title="lubricentro@gmail.com"
-                className="w-6 h-6 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+                className="w-6 h-6"
               />
               lubricentro@gmail.com
             </li>
@@ -33,7 +33,7 @@ export default function Footer() {
                 src={wablogo}
                 alt="Whatsapp +542911111111"
                 title="Whatsapp +542911111111"
-                className="w-5 h-5 transform hover:scale-110 transition-transform duration-300 ease-in-out mr-1"
+                className="w-5 h-5 mr-1"
               />
               +542911111111
             </li>
@@ -47,7 +47,7 @@ export default function Footer() {
                 src={iglogo}
                 alt="Instagram @lubricentro"
                 title="Instagram @lubricentro"
-                className="w-5 h-5 transform hover:scale-110 transition-transform duration-300 ease-in-out mr-1"
+                className="w-5 h-5 mr-1"
               />
               @Instagram
             </li>
@@ -61,7 +61,7 @@ export default function Footer() {
                 src={fblogo}
                 alt="Facebook"
                 title="Facebook"
-                className="w-6 h-6 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+                className="w-6 h-6"
               />
               Facebook
             </li>
