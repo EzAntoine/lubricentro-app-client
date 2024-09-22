@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Contact() {
   return (
     <section id="contact">
-      <div className="w-full p-8 bg-[#2ccc71] bg-opacity-20">
+      <div className="w-full p-16 bg-[#2ccc71] bg-opacity-20">
         <h2 className="text-left text-4xl font-bold text-white md:mb-12">
           Contacto
         </h2>
