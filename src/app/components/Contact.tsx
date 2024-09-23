@@ -29,7 +29,7 @@ export default function Contact() {
             <ul className="flex space-x-4">
               <Link
                 href="mailto:lubricentro@gmail.com"
-                className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out"
+                className="hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <li className="flex items-center">
                   <Image
@@ -43,7 +43,7 @@ export default function Contact() {
               </Link>
               <Link
                 href="https://instagram.com/lubricentro"
-                className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out"
+                className="hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <li className="flex items-center">
                   <Image
@@ -57,7 +57,7 @@ export default function Contact() {
               </Link>
               <Link
                 href="https://facebook.com/lubricentro"
-                className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out"
+                className="hover:scale-110 transition-transform duration-200 ease-in-out"
               >
                 <li className="flex items-center">
                   <Image

@@ -12,7 +12,7 @@ export default function Footer() {
         <ul className="flex space-x-4 mb-4 text-md">
           <Link
             href="mailto:lubricentro@gmail.com"
-            className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
           >
             <li className="flex items-center">
               <Image
@@ -26,7 +26,7 @@ export default function Footer() {
           </Link>
           <Link
             href="wa.me/+542911111111"
-            className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
           >
             <li className="flex items-center">
               <Image
@@ -40,7 +40,7 @@ export default function Footer() {
           </Link>
           <Link
             href="https://instagram.com/lubricentro"
-            className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
           >
             <li className="flex items-center">
               <Image
@@ -54,7 +54,7 @@ export default function Footer() {
           </Link>
           <Link
             href="https://facebook.com/lubricentro"
-            className="mx-4 hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
           >
             <li className="flex items-center">
               <Image
