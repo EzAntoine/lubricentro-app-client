@@ -1,7 +1,7 @@
 /* import maillogo from "../../../public/svg/email-round.svg";
 import wablogo from "../../../public/svg/whatsapp-black.svg"; */
-import fblogo from "../../../public/svg/facebook-round.svg";
-import iglogo from "../../../public/svg/instagram-round.svg";
+import fblogo from "../../../public/svg/facebook-orig.svg";
+import iglogo from "../../../public/svg/instagram-orig.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,7 +52,7 @@ export default function Footer() {
                 src={iglogo}
                 alt="Instagram @lubricentro"
                 title="Instagram @lubricentro"
-                className="w-5 h-5 mr-1"
+                className="w-6 h-6 mr-1"
               />
               @Instagram
             </li>
@@ -66,7 +66,7 @@ export default function Footer() {
                 src={fblogo}
                 alt="Facebook"
                 title="Facebook"
-                className="w-6 h-6"
+                className="w-6 h-6 mr-1"
               />
               Facebook
             </li>

@@ -1,7 +1,7 @@
 import walogo from "../../../public/svg/whatsapp-color.svg";
 /* import fblogo from "../../../public/svg/facebook-round.svg";
 import iglogo from "../../../public/svg/instagram-round.svg"; */
-import maillogo from "../../../public/svg/email-round.svg";
+import maillogo from "../../../public/svg/mail.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function Contact() {
               src={maillogo}
               alt="Email"
               title="lubricentro@gmail.com"
-              className="w-11 h-11 hover:scale-110 transition-transform duration-200 ease-in-out"
+              className="w-11 h-11 hover:scale-110 transition-transform duration-200 ease-in-out rounded-md"
             />
           </Link>
           {/* <h3 className="text-2xl mt-4">Redes Sociales</h3>
