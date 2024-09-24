@@ -1,7 +1,7 @@
 import walogo from "../../../public/svg/whatsapp-color.svg";
 /* import fblogo from "../../../public/svg/facebook-round.svg";
-import iglogo from "../../../public/svg/instagram-round.svg";
-import maillogo from "../../../public/svg/email-round.svg"; */
+import iglogo from "../../../public/svg/instagram-round.svg"; */
+import maillogo from "../../../public/svg/email-round.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,6 +21,19 @@ export default function Contact() {
               alt="Whatsapp +542911111111"
               title="Whatsapp +542911111111"
               className=" w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+            />
+          </Link>
+          <Link
+            href="mailto:lubricentro@gmail.com"
+            className=" flex items-center"
+          >
+            <h3 className="text-2xl">Email:</h3>
+            <span className="mx-3">lubricentro@gmail.com</span>
+            <Image
+              src={maillogo}
+              alt="Email"
+              title="lubricentro@gmail.com"
+              className="w-11 h-11 hover:scale-110 transition-transform duration-200 ease-in-out"
             />
           </Link>
           {/* <h3 className="text-2xl mt-4">Redes Sociales</h3>
