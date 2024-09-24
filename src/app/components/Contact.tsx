@@ -21,10 +21,10 @@ export default function Contact() {
               src={walogo}
               alt="Whatsapp +542911111111"
               title="Whatsapp +542911111111"
-              className="w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out mx-6"
+              className=" w-10 h-10 transform hover:scale-110 transition-transform duration-300 ease-in-out mx-6"
             />
           </Link>
-          <h3 className="text-2xl mt-4">Redes Sociales</h3>
+          {/* <h3 className="text-2xl mt-4">Redes Sociales</h3>
           <div className="container mx-auto flex flex-col items-center">
             <ul className="flex space-x-4">
               <Link
@@ -70,7 +70,7 @@ export default function Contact() {
                 </li>
               </Link>
             </ul>
-          </div>
+          </div> */}
           <h3 className="text-2xl mt-4">Ubicacion</h3>
           <h4 className="text-center text-xl">
             Calle 123, Bahia Blanca (B8000), Buenos Aires, Argentina
