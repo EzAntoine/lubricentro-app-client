@@ -7,9 +7,14 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <section className="text-gray-300 w-full p-2 bottom-0 right-0 left-0 bg-[#2d2c2d] bg-opacity-100">
-      <div className="container mx-auto flex flex-col items-center">
-        <ul className="flex space-x-4 mb-4 text-md">
+    <section className="text-gray-300 w-full p-2 bottom-0 right-0 left-0 bg-[#2d2c2d] bg-opacity-100 grid grid-cols-4">
+      <div className="grid items-center">
+        <h4 className="text-lg">Horarios</h4>
+        <li className="list-none">Lunes a Viernes 9 a 18hs</li>
+        <li className="list-none">Sabados y Domingos CERRADO</li>
+      </div>
+      <div className="container mx-auto text-lg items-center col-start-2 col-span-2">
+        <ul className="flex space-x-4 text-md">
           <Link
             href="mailto:lubricentro@gmail.com"
             className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
@@ -67,16 +72,16 @@ export default function Footer() {
             </li>
           </Link>
         </ul>
-        <span className="text-sm">
-          Sitio creado por{" "}
-          <Link
-            href="https://ezequielantoine.vercel.app/"
-            className="underline hover:text-cyan-600"
-          >
-            EzAntoine
-          </Link>
-        </span>
       </div>
+      <span className="items-end justify-end text-sm col-start-4 col-end-4 flex">
+        Sitio creado por
+        <Link
+          href="https://ezequielantoine.vercel.app/"
+          className="underline hover:text-cyan-600 mx-1"
+        >
+          EzAntoine
+        </Link>
+      </span>
     </section>
   );
 }
