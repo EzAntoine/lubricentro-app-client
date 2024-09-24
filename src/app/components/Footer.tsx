@@ -1,7 +1,7 @@
-import wablogo from "../../../public/svg/whatsapp-black.svg";
+/* import maillogo from "../../../public/svg/email-round.svg";
+import wablogo from "../../../public/svg/whatsapp-black.svg"; */
 import fblogo from "../../../public/svg/facebook-round.svg";
 import iglogo from "../../../public/svg/instagram-round.svg";
-import maillogo from "../../../public/svg/email-round.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,9 +13,9 @@ export default function Footer() {
         <li className="list-none">Lunes a Viernes 9 a 18hs</li>
         <li className="list-none">Sabados y Domingos CERRADO</li>
       </div>
-      <div className="container mx-auto text-lg items-center col-start-2 col-span-2">
-        <ul className="flex space-x-4 text-md">
-          <Link
+      <div className="container mx-auto text-lg col-start-2 col-span-2">
+        <ul className="flex space-x-4 text-md items-center justify-center">
+          {/* <Link
             href="mailto:lubricentro@gmail.com"
             className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
           >
@@ -42,7 +42,7 @@ export default function Footer() {
               />
               +542911111111
             </li>
-          </Link>
+          </Link> */}
           <Link
             href="https://instagram.com/lubricentro"
             className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-gray-400"
