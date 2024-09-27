@@ -2,9 +2,9 @@
 import Image from "next/image";
 import React from "react";
 import Slider from "react-slick";
-import lubricanteImg from "../../../public/images/slider/lubricante.jpg";
-import motorImg from "../../../public/images/slider/motor.jpg";
-import varillaImg from "../../../public/images/slider/varilla.jpg";
+import lubricanteImg from "../../../../public/images/slider/lubricante.jpg";
+import motorImg from "../../../../public/images/slider/motor.jpg";
+import varillaImg from "../../../../public/images/slider/varilla.jpg";
 
 export default function SimpleSlider() {
   const settings = {

@@ -1,7 +1,7 @@
-import walogo from "../../../public/svg/whatsapp-color.svg";
+import walogo from "../../../../public/svg/whatsapp-color.svg";
 /* import fblogo from "../../../public/svg/facebook-round.svg";
 import iglogo from "../../../public/svg/instagram-round.svg"; */
-import maillogo from "../../../public/svg/mail.svg";
+import maillogo from "../../../../public/svg/mail.svg";
 import Image from "next/image";
 import Link from "next/link";
 
