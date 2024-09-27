@@ -5,7 +5,7 @@ import NavLink from "./NavLink";
 import Image from "next/image";
 import MenuOverlay from "./MenuOverlay";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import LogoNav from "../../../public/images/logo200px.png";
+import LogoNav from "../../../../public/images/logo200px.png";
 
 const navLinks = [
   {
