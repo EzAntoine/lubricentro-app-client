@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Navbar from "./NavbarAdmin";
+import NavbarAdmin from "./NavbarAdmin";
 import Sidebar from "./SidebarAdmin";
 
 export default function Dashboard() {
@@ -21,20 +21,40 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col h-screen">
-      <Navbar />
-      <div className="flex flex-grow">
-        <Sidebar setActiveTab={setActiveTab} />
+      <NavbarAdmin />
+      <div className="flex flex-grow mt-14">
+        <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
         <main className="flex-grow p-4">
-          <h1 className="text-xl font-bold">
+          {/* <h1 className="text-xl font-bold">
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h1>
-          <ul>
+          </h1> */}
+          {/* <ul>
             {data.map((item) => (
-              <li key={item.id} className="border-b py-2">
-                {item.name}
+              <li key={item._id} className="border-b py-2">
+                {item.username}
               </li>
             ))}
-          </ul>
+          </ul> */}
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  {" "}
+                    Username
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
+              {data.map((user) => (
+                <tr key={user._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {user.username}
+                  </td>{" "}
+                   
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </main>
       </div>
     </div>
