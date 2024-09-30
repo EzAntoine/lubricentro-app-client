@@ -32,7 +32,7 @@ export default function NavBar() {
           href={"/"}
           className="text-2xl md:text-2xl lg:text-3xl text-white font-semibold"
         >
-          <Image src={LogoNav} alt="Home" className="" />
+          <Image src={LogoNav} alt="Home" />
         </Link>
 
         <div className="mobile-menu block md:hidden">
