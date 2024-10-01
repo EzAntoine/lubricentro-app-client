@@ -8,28 +8,36 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
     <aside className="w-64 bg-[#2d2c2d] bg-opacity-100 h-full p-4">
       <ul>
         <li
-          onClick={() => setActiveTab("ordenes")}
+          onClick={() => setActiveTab("orders")}
           className={`cursor-pointer p-2 rounded-sm ${
-            activeTab === "ordenes" ? "bg-gray-700" : "hover:bg-gray-600"
+            activeTab === "orders" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Ordenes
         </li>
         <li
-          onClick={() => setActiveTab("productos")}
+          onClick={() => setActiveTab("products")}
           className={`cursor-pointer p-2 rounded-sm ${
-            activeTab === "productos" ? "bg-gray-700" : "hover:bg-gray-600"
+            activeTab === "products" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Productos
         </li>
         <li
-          onClick={() => setActiveTab("clientes")}
+          onClick={() => setActiveTab("clients")}
           className={`cursor-pointer p-2 rounded-sm ${
             activeTab === "clientes" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Clientes
+        </li>
+        <li
+          onClick={() => setActiveTab("vehicles")}
+          className={`cursor-pointer p-2 rounded-sm ${
+            activeTab === "vehicles" ? "bg-gray-700" : "hover:bg-gray-600"
+          }`}
+        >
+          Vehiculos
         </li>
         <li
           onClick={() => setActiveTab("users")}
