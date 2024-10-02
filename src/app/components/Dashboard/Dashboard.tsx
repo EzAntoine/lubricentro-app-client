@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import Sidebar from "./SidebarAdmin";
 import OrdersComponent from "../TabComponents/OrdersComponent";
+import ClientsComponent from "../TabComponents/ClientsComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -24,9 +25,9 @@ export default function Dashboard() {
     switch (activeTab) {
       case "orders":
         return <OrdersComponent data={data} />;
-      /* case "clients":
+      case "clients":
         return <ClientsComponent data={data} />;
-      case "users":
+      /* case "users":
         return <UsersComponent data={data} />;
       case "vehicles":
         return <VehiclesComponent data={data} />; */
