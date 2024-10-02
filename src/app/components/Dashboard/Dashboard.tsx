@@ -4,6 +4,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import Sidebar from "./SidebarAdmin";
 import OrdersComponent from "../TabComponents/OrdersComponent";
 import ClientsComponent from "../TabComponents/ClientsComponent";
+import UsersComponent from "../TabComponents/UsersComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -27,9 +28,9 @@ export default function Dashboard() {
         return <OrdersComponent data={data} />;
       case "clients":
         return <ClientsComponent data={data} />;
-      /* case "users":
+      case "users":
         return <UsersComponent data={data} />;
-      case "vehicles":
+      /* case "vehicles":
         return <VehiclesComponent data={data} />; */
       default:
         return null;
