@@ -25,7 +25,7 @@ const VehiclesComponent: React.FC<VehiclesComponentProps> = ({ data }) => {
         <input type="text" placeholder="Buscar..." className="p-2 rounded" />
       </div>
       {data.length === 0 ? (
-        <p>No hay órdenes disponibles.</p>
+        <p className="ml-4">No hay vehículos disponibles.</p>
       ) : (
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
