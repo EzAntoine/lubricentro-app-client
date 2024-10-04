@@ -15,14 +15,14 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
         >
           Ordenes
         </li>
-        <li
+        {/* <li
           onClick={() => setActiveTab("products")}
           className={`cursor-pointer p-2 rounded-sm ${
             activeTab === "products" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Productos
-        </li>
+        </li> */}
         <li
           onClick={() => setActiveTab("clients")}
           className={`cursor-pointer p-2 rounded-sm ${

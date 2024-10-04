@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import Sidebar from "./SidebarAdmin";
 import OrdersComponent from "../TabComponents/OrdersComponent";
+import ClientsComponent from "../TabComponents/ClientsComponent";
+import UsersComponent from "../TabComponents/UsersComponent";
+import VehiclesComponent from "../TabComponents/VehiclesComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -24,12 +27,12 @@ export default function Dashboard() {
     switch (activeTab) {
       case "orders":
         return <OrdersComponent data={data} />;
-      /* case "clients":
+      case "clients":
         return <ClientsComponent data={data} />;
       case "users":
         return <UsersComponent data={data} />;
       case "vehicles":
-        return <VehiclesComponent data={data} />; */
+        return <VehiclesComponent data={data} />;
       default:
         return null;
     }
@@ -41,39 +44,9 @@ export default function Dashboard() {
       <div className="flex flex-grow mt-14">
         <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
         <main className="flex-grow py-2">
-          {/* <h1 className="text-xl font-bold">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h1> */}
           <div className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
             {renderContent()}
           </div>
-          {/* <ul className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
-            {data.map((item) => (
-              <li key={item._id} className="border-b py-2">
-                {item.username}
-              </li>
-            ))}
-          </ul>
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
-                  {" "}
-                    Username
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
-              {data.map((user) => (
-                <tr key={user._id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {user.username}
-                  </td>{" "}
-                   
-                </tr>
-              ))}
-            </tbody>
-          </table> */}
         </main>
       </div>
     </div>
