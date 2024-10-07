@@ -1,6 +1,6 @@
 import Image from "next/image";
 import LogoNav from "../../../../public/images/logo200px.png";
-import profileLogo from "../../../../public/svg/profile-round.svg";
+import DropdownMenu from "./DropdownMenu";
 
 export default function NavbarAdmin() {
   return (
@@ -8,13 +8,8 @@ export default function NavbarAdmin() {
       <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Image src={LogoNav} alt="Lubricentro Maceratesi" />
         <div className="flex flex-wrap">
-          <span className="mr-2 p-1">Usuario</span>
+          <DropdownMenu />
           {/* La siguiente imagen sera reemplazada por una generica o en si se implementa login google con la foto respectiva. */}
-          <Image
-            src={profileLogo}
-            alt="Foto de perfil"
-            className="h-8 w-8 p-1 rounded-full bg-gray-200"
-          />
         </div>
       </div>
     </nav>
