@@ -1,4 +1,5 @@
 import { LoginFormProps } from "@/types/types";
+import swal from "sweetalert";
 
 export default function LoginForm({
   token,
@@ -19,14 +20,26 @@ export default function LoginForm({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
+        return res.json();
+      })
       .then((json) => {
         if (json.access_token) {
           setToken(json.access_token);
           localStorage.setItem("userToken", json.access_token);
         }
       })
-      .catch((error) => console.log("Error: " + error));
+      .catch((error) => {
+        swal(
+          "Credenciales incorrectas!",
+          "Por favor intente nuevamente.",
+          "error"
+        );
+        setUserData({ username: "", password: "" });
+      });
   };
 
   return (
