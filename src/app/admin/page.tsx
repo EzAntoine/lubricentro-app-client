@@ -1,7 +1,26 @@
+"use client";
 import Head from "next/head";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
+import { useEffect, useState } from "react";
+import LoginForm from "../components/Forms/LoginForm";
 
 export default function AdminHome() {
+  const [token, setToken] = useState<string | null>(null);
+  const [userData, setUserData] = useState<{
+    username: string;
+    password: string;
+  }>({
+    username: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("userToken");
+      setToken(storedToken ?? null);
+    }
+  }, []);
+
   return (
     <div className="bg-hero-image min-h-screen bg-cover bg-center">
       <Head>
@@ -16,7 +35,21 @@ export default function AdminHome() {
       </Head>
 
       <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-70">
-        <Dashboard />
+        {token ? (
+          <Dashboard
+            token={token}
+            setToken={setToken}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        ) : (
+          <LoginForm
+            token={token}
+            setToken={setToken}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        )}
       </main>
     </div>
   );
