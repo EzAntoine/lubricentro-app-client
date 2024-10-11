@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
         <li
           onClick={() => setActiveTab("clients")}
           className={`cursor-pointer p-2 rounded-sm ${
-            activeTab === "clientes" ? "bg-gray-700" : "hover:bg-gray-600"
+            activeTab === "clients" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Clientes
