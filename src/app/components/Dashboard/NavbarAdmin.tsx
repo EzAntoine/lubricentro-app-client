@@ -4,16 +4,24 @@ import DropdownMenu from "./DropdownMenu";
 import { PowerIcon } from "@heroicons/react/24/outline";
 import { LoginFormProps } from "@/types/types";
 
-export default function NavbarAdmin({ setToken, userData }: LoginFormProps) {
+export default function NavbarAdmin({
+  setToken,
+  userData,
+  setUserData,
+}: LoginFormProps) {
   const logoutHandler = () => {
     setToken(null);
     localStorage.clear();
+    setUserData({
+      username: "",
+      password: "",
+    });
   };
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-10 bg-[#2d2c2d] bg-opacity-100 text-white">
       <div className="flex flex-wrap items-end justify-between mx-auto px-4 py-2">
-        <Image src={LogoNav} alt="Lubricentro Maceratesi" />
+        <Image src={LogoNav} alt="Lubricentro Maceratesi" priority />
         <div className="flex flex-wrap">
           <DropdownMenu userData={userData} />
           {/* La siguiente imagen sera reemplazada por una generica o en si se implementa login google con la foto respectiva. */}

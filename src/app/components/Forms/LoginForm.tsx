@@ -1,4 +1,7 @@
 import { LoginFormProps } from "@/types/types";
+import LogoNav from "../../../../public/images/logo200px.png";
+import swal from "sweetalert";
+import Image from "next/image";
 
 export default function LoginForm({
   token,
@@ -19,20 +22,35 @@ export default function LoginForm({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
+        return res.json();
+      })
       .then((json) => {
         if (json.access_token) {
           setToken(json.access_token);
           localStorage.setItem("userToken", json.access_token);
         }
       })
-      .catch((error) => console.log("Error: " + error));
+      .catch((error) => {
+        swal(
+          "Credenciales incorrectas!",
+          "Por favor intente nuevamente.",
+          "error"
+        );
+        setUserData({ username: "", password: "" });
+      });
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md w-96">
-        <p className="mb-4 text-center">Ingrese usuario y contraseña</p>
+      <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
+        <div className="flex flex-col items-center justify-center">
+          <Image src={LogoNav} alt="Lubricentro Maceratesi" priority />
+          <p className="mt-2 mb-4 text-center">Ingrese usuario y contraseña</p>
+        </div>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
