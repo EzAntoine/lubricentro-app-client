@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { LoginFormProps } from "@/types/types";
 
-interface LoginFormProps {
-  token: string | null;
-  setToken: (token: string | null) => void;
-}
-export default function LoginForm({ token, setToken }: LoginFormProps) {
-  const [userData, setUserData] = useState({
-    username: "",
-    password: "",
-  });
-
+export default function LoginForm({
+  token,
+  setToken,
+  userData,
+  setUserData,
+}: LoginFormProps) {
   const inputHandler = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });

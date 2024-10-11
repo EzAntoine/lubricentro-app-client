@@ -6,6 +6,13 @@ import LoginForm from "../components/Forms/LoginForm";
 
 export default function AdminHome() {
   const [token, setToken] = useState<string | null>(null);
+  const [userData, setUserData] = useState<{
+    username: string;
+    password: string;
+  }>({
+    username: "",
+    password: "",
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -29,9 +36,19 @@ export default function AdminHome() {
 
       <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-70">
         {token ? (
-          <Dashboard token={token} setToken={setToken} />
+          <Dashboard
+            token={token}
+            setToken={setToken}
+            userData={userData}
+            setUserData={setUserData}
+          />
         ) : (
-          <LoginForm token={token} setToken={setToken} />
+          <LoginForm
+            token={token}
+            setToken={setToken}
+            userData={userData}
+            setUserData={setUserData}
+          />
         )}
       </main>
     </div>

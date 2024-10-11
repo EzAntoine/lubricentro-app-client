@@ -6,8 +6,9 @@ import OrdersComponent from "../TabComponents/OrdersComponent";
 import ClientsComponent from "../TabComponents/ClientsComponent";
 import UsersComponent from "../TabComponents/UsersComponent";
 import VehiclesComponent from "../TabComponents/VehiclesComponent";
+import { LoginFormProps } from "@/types/types";
 
-export default function Dashboard({ token, setToken }) {
+export default function Dashboard({ setToken, userData }: LoginFormProps) {
   const [activeTab, setActiveTab] = useState("orders");
   const [data, setData] = useState([]);
 
@@ -39,7 +40,7 @@ export default function Dashboard({ token, setToken }) {
 
   return (
     <div className="flex flex-col h-screen">
-      <NavbarAdmin token={token} setToken={setToken} />
+      <NavbarAdmin setToken={setToken} userData={userData} />
       <div className="flex flex-grow mt-14">
         <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
         <main className="flex-grow py-2">
