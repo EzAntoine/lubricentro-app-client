@@ -2,7 +2,6 @@ export default function LoginForm() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="bg-gray-800 p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Iniciar Sesión</h2>
         <p className="mb-4 text-center">Ingrese usuario y contraseña</p>
         <form>
           <div className="mb-4">
@@ -40,7 +39,7 @@ export default function LoginForm() {
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
             >
-              Login
+              Iniciar Sesión
             </button>
           </div>
         </form>
