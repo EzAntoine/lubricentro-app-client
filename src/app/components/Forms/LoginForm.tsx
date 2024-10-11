@@ -1,5 +1,7 @@
 import { LoginFormProps } from "@/types/types";
+import LogoNav from "../../../../public/images/logo200px.png";
 import swal from "sweetalert";
+import Image from "next/image";
 
 export default function LoginForm({
   token,
@@ -44,8 +46,11 @@ export default function LoginForm({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md w-96">
-        <p className="mb-4 text-center">Ingrese usuario y contraseña</p>
+      <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
+        <div className="flex flex-col items-center justify-center">
+          <Image src={LogoNav} alt="Lubricentro Maceratesi" priority />
+          <p className="mt-2 mb-4 text-center">Ingrese usuario y contraseña</p>
+        </div>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
