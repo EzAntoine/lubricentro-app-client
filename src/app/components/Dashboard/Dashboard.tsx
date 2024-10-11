@@ -7,7 +7,7 @@ import ClientsComponent from "../TabComponents/ClientsComponent";
 import UsersComponent from "../TabComponents/UsersComponent";
 import VehiclesComponent from "../TabComponents/VehiclesComponent";
 
-export default function Dashboard() {
+export default function Dashboard({ token, setToken }) {
   const [activeTab, setActiveTab] = useState("orders");
   const [data, setData] = useState([]);
 
@@ -16,7 +16,6 @@ export default function Dashboard() {
       const response = await fetch(`http://localhost:3001/${activeTab}`);
       const result = await response.json();
 
-      console.log(result);
       setData(result);
     };
 
@@ -40,7 +39,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col h-screen">
-      <NavbarAdmin />
+      <NavbarAdmin token={token} setToken={setToken} />
       <div className="flex flex-grow mt-14">
         <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
         <main className="flex-grow py-2">

@@ -1,9 +1,43 @@
-export default function LoginForm() {
+import { useState } from "react";
+
+interface LoginFormProps {
+  token: string | null;
+  setToken: (token: string | null) => void;
+}
+export default function LoginForm({ token, setToken }: LoginFormProps) {
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:3001/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.access_token) {
+          setToken(json.access_token);
+          localStorage.setItem("userToken", json.access_token);
+        }
+      })
+      .catch((error) => console.log("Error: " + error));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="bg-gray-800 p-6 rounded-lg shadow-md w-96">
         <p className="mb-4 text-center">Ingrese usuario y contraseña</p>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -16,7 +50,9 @@ export default function LoginForm() {
               id="username"
               name="username"
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              onChange={inputHandler}
+              value={userData.username}
             />
           </div>
           <div className="mb-4">
@@ -31,7 +67,9 @@ export default function LoginForm() {
               id="password"
               name="password"
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              onChange={inputHandler}
+              value={userData.password}
             />
           </div>
           <div>
