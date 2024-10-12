@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CreateClientForm() {
+export default function CreateClientForm({ setFormOpen }) {
   const [newClient, setNewClient] = useState({
     name: "",
     surname: "",
@@ -8,6 +8,7 @@ export default function CreateClientForm() {
     email: "",
     phone: "",
     detail: "",
+    vehicles: [],
   });
 
   const inputHandler = (e) => {
@@ -18,32 +19,46 @@ export default function CreateClientForm() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    /**fetch(`http://localhost:3001/auth/login`, {
+    fetch(`http://localhost:3001/clients`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("userToken")}`,
+      },
+      body: JSON.stringify(newClient),
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Unauthorized");
+          throw new Error("Error al crear nuevo cliente");
+          setNewClient({
+            name: "",
+            surname: "",
+            dni: "",
+            email: "",
+            phone: "",
+            detail: "",
+            vehicles: [],
+          });
         }
-        return res.json();
-      })
-      .then((json) => {
-        if (json.access_token) {
-          setToken(json.access_token);
-          localStorage.setItem("userToken", json.access_token);
-        }
+        swal("Cliente creado correctamente!", "", "success");
+        setFormOpen(false);
       })
       .catch((error) => {
         swal(
-          "Credenciales incorrectas!",
+          "Error al crear nuevo cliente",
           "Por favor intente nuevamente.",
           "error"
         );
-        setUserData({ username: "", password: "" });
+        setNewClient({
+          name: "",
+          surname: "",
+          dni: "",
+          email: "",
+          phone: "",
+          detail: "",
+          vehicles: [],
+        });
       });
-	  **/
   };
 
   return (
