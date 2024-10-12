@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CreateClientForm({ setFormOpen }) {
+export default function CreateClientForm({ setFormOpen, fetchClients }) {
   const [newClient, setNewClient] = useState({
     name: "",
     surname: "",
@@ -30,25 +30,7 @@ export default function CreateClientForm({ setFormOpen }) {
       .then((res) => {
         if (!res.ok) {
           throw new Error("Error al crear nuevo cliente");
-          setNewClient({
-            name: "",
-            surname: "",
-            dni: "",
-            email: "",
-            phone: "",
-            detail: "",
-            vehicles: [],
-          });
         }
-        swal("Cliente creado correctamente!", "", "success");
-        setFormOpen(false);
-      })
-      .catch((error) => {
-        swal(
-          "Error al crear nuevo cliente",
-          "Por favor intente nuevamente.",
-          "error"
-        );
         setNewClient({
           name: "",
           surname: "",
@@ -58,6 +40,16 @@ export default function CreateClientForm({ setFormOpen }) {
           detail: "",
           vehicles: [],
         });
+        swal("Cliente creado correctamente!", "", "success");
+        fetchClients();
+        setFormOpen(false);
+      })
+      .catch((error) => {
+        swal(
+          "Error al crear nuevo cliente",
+          "Por favor intente nuevamente.",
+          "error"
+        );
       });
   };
 

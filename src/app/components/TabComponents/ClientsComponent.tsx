@@ -1,5 +1,5 @@
 import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateClientForm from "../Forms/CreateClientForm";
 
 interface Client {
@@ -15,8 +15,19 @@ interface ClientsComponentProps {
   data: Client[];
 }
 
-const ClientsComponent: React.FC<ClientsComponentProps> = ({ data }) => {
+const ClientsComponent: React.FC<ClientsComponentProps> = () => {
   const [formOpen, setFormOpen] = useState(false);
+  const [clients, setClients] = useState([]);
+
+  const fetchClients = async () => {
+    const response = await fetch("http://localhost:3001/clients");
+    const data = await response.json();
+    setClients(data);
+  };
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
 
   const clickHandler = (e) => {
     setFormOpen(true);
@@ -25,7 +36,10 @@ const ClientsComponent: React.FC<ClientsComponentProps> = ({ data }) => {
   return (
     <>
       {formOpen ? (
-        <CreateClientForm setFormOpen={setFormOpen} />
+        <CreateClientForm
+          setFormOpen={setFormOpen}
+          fetchClients={fetchClients}
+        />
       ) : (
         <div>
           <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
@@ -42,7 +56,7 @@ const ClientsComponent: React.FC<ClientsComponentProps> = ({ data }) => {
               className="p-2 rounded"
             />
           </div>
-          {data.length === 0 ? (
+          {clients.length === 0 ? (
             <p className="ml-4">No hay clientes disponibles.</p>
           ) : (
             <table className="min-w-full divide-y divide-gray-200">
@@ -64,7 +78,7 @@ const ClientsComponent: React.FC<ClientsComponentProps> = ({ data }) => {
                 </tr>
               </thead>
               <tbody className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
-                {data.map((item) => (
+                {clients.map((item) => (
                   <tr key={item._id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {item.name + " " + item.surname}

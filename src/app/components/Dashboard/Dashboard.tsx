@@ -16,7 +16,7 @@ export default function Dashboard({
   const [activeTab, setActiveTab] = useState("orders");
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  /**useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`http://localhost:3001/${activeTab}`);
       const result = await response.json();
@@ -25,14 +25,14 @@ export default function Dashboard({
     };
 
     fetchData();
-  }, [activeTab]);
+  }, [activeTab]);**/
 
   const renderContent = () => {
     switch (activeTab) {
       case "orders":
         return <OrdersComponent data={data} />;
       case "clients":
-        return <ClientsComponent data={data} />;
+        return <ClientsComponent data={data} setData={setData} />;
       case "users":
         return <UsersComponent data={data} />;
       case "vehicles":
