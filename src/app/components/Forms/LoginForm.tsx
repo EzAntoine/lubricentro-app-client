@@ -32,6 +32,7 @@ export default function LoginForm({
         if (json.access_token) {
           setToken(json.access_token);
           localStorage.setItem("userToken", json.access_token);
+          localStorage.setItem("username", userData.username);
         }
       })
       .catch((error) => {
