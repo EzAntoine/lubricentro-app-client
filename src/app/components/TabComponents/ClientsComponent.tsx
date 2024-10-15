@@ -51,7 +51,7 @@ const ClientsComponent = () => {
         />
       ) : (
         <div>
-          <div className="bg-[#2d2c2d] bg-opacity-90 flex flex-wrap items-center justify-between mx-auto px-4 py-1 -mt-1">
+          <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-1 -mt-1">
             <h1 className="text-xl font-bold p-2">Clientes</h1>
             <button
               onClick={clickHandler}
@@ -86,7 +86,7 @@ const ClientsComponent = () => {
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
                 </tr>
               </thead>
-              <tbody className="bg-[#2d2c2d] bg-opacity-90 divide-y divide-gray-200 min-h-screen">
+              <tbody className="bg-[#2d2c2d] bg-opacity-80 divide-y divide-gray-200 min-h-screen">
                 {clients.map((item) => (
                   <tr key={item._id}>
                     <td className="px-6 py-4 whitespace-nowrap">

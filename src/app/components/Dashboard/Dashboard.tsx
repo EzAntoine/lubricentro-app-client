@@ -52,13 +52,13 @@ export default function Dashboard({
   };
 
   return (
-    <div className="bg-hero-image min-h-screen bg-cover bg-center bg-fixed bg-opacity-90">
+    <div className="bg-hero-image min-h-screen bg-cover bg-center bg-fixed">
       <NavbarAdmin logout={logout} />
       <div className="flex flex-grow mt-14">
         <div className="mt-14 fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-10;">
           <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
         </div>
-        <main className="ml-64 h-screen flex-grow py-2 mb-2 min-h-screen">
+        <main className="ml-64 h-screen flex-grow py-2 mb-2 min-h-screen bg-[#2d2c2d] bg-opacity-70">
           <div className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
             {renderContent()}
           </div>

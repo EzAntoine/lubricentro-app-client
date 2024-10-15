@@ -40,7 +40,7 @@ export default function AdminHome() {
         <link rel="preload" href="/images/herramientas.jpg" as="image" />
       </Head>
 
-      <main className="flex min-h-screen flex-col  bg-[#2d2c2d] bg-opacity-70">
+      <main className="flex min-h-screen flex-col bg-[#2d2c2d] bg-opacity-70">
         {loading ? (
           <div
             role="status"
