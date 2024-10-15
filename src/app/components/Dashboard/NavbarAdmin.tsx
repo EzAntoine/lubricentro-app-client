@@ -2,16 +2,10 @@ import Image from "next/image";
 import LogoNav from "../../../../public/images/logo200px.png";
 import DropdownMenu from "./DropdownMenu";
 import { PowerIcon } from "@heroicons/react/24/outline";
-import { LoginFormProps } from "@/types/types";
 
-export default function NavbarAdmin({ setToken, setUserData }: LoginFormProps) {
+export default function NavbarAdmin({ logout }) {
   const logoutHandler = () => {
-    setToken(null);
-    localStorage.clear();
-    setUserData({
-      username: "",
-      password: "",
-    });
+    logout();
   };
 
   return (

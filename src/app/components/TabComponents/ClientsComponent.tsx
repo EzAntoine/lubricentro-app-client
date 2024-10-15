@@ -1,7 +1,7 @@
 import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import CreateClientForm from "../Forms/CreateClientForm";
-
+import { URL } from "../../../../config/consts";
 interface Client {
   _id: string;
   name: string;
@@ -11,18 +11,27 @@ interface Client {
   detail: string;
 }
 
-interface ClientsComponentProps {
-  data: Client[];
-}
-
-const ClientsComponent: React.FC<ClientsComponentProps> = () => {
+const ClientsComponent = () => {
   const [formOpen, setFormOpen] = useState(false);
-  const [clients, setClients] = useState([]);
-
+  const [clients, setClients] = useState<Client[]>([]);
   const fetchClients = async () => {
-    const response = await fetch("http://localhost:3001/clients");
-    const data = await response.json();
-    setClients(data);
+    await fetch(`${URL}/clients`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener clientes");
+        }
+        const data = await response.json();
+        setClients(data.data);
+      })
+      .catch((error) => {
+        swal("Error al obtener clientes", "", "error");
+      });
   };
 
   useEffect(() => {
@@ -42,18 +51,18 @@ const ClientsComponent: React.FC<ClientsComponentProps> = () => {
         />
       ) : (
         <div>
-          <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
+          <div className="bg-[#2d2c2d] bg-opacity-90 flex flex-wrap items-center justify-between mx-auto px-4 py-1 -mt-1">
             <h1 className="text-xl font-bold p-2">Clientes</h1>
             <button
               onClick={clickHandler}
-              className="px-4 py-2 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
+              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
             >
               Nuevo Cliente
             </button>
             <input
               type="text"
               placeholder="Buscar..."
-              className="p-2 rounded"
+              className="p-1 rounded"
             />
           </div>
           {clients.length === 0 ? (
@@ -77,7 +86,7 @@ const ClientsComponent: React.FC<ClientsComponentProps> = () => {
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
                 </tr>
               </thead>
-              <tbody className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
+              <tbody className="bg-[#2d2c2d] bg-opacity-90 divide-y divide-gray-200 min-h-screen">
                 {clients.map((item) => (
                   <tr key={item._id}>
                     <td className="px-6 py-4 whitespace-nowrap">

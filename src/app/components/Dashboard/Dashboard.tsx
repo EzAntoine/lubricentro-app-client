@@ -32,7 +32,7 @@ export default function Dashboard({
       case "orders":
         return <OrdersComponent data={data} />;
       case "clients":
-        return <ClientsComponent data={data} setData={setData} />;
+        return <ClientsComponent />;
       case "users":
         return <UsersComponent data={data} />;
       case "vehicles":
@@ -42,16 +42,23 @@ export default function Dashboard({
     }
   };
 
+  const logout = () => {
+    setToken(null);
+    localStorage.clear();
+    setUserData({
+      username: "",
+      password: "",
+    });
+  };
+
   return (
-    <div className="flex flex-col h-screen">
-      <NavbarAdmin
-        setToken={setToken}
-        userData={userData}
-        setUserData={setUserData}
-      />
+    <div className="bg-hero-image min-h-screen bg-cover bg-center bg-fixed bg-opacity-90">
+      <NavbarAdmin logout={logout} />
       <div className="flex flex-grow mt-14">
-        <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
-        <main className="flex-grow py-2">
+        <div className="mt-14 fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-10;">
+          <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
+        </div>
+        <main className="ml-64 h-screen flex-grow py-2 mb-2 min-h-screen">
           <div className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
             {renderContent()}
           </div>
