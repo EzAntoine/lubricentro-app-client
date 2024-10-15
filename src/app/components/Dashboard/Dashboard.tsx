@@ -59,10 +59,8 @@ export default function Dashboard({
           <div className="mt-14 fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-10;">
             <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
           </div>
-          <main className="ml-64 h-screen flex-grow py-2 mb-2 min-h-screen">
-            <div className="bg-gray-400 bg-opacity-20 divide-y divide-gray-200">
-              {renderContent()}
-            </div>
+          <main className="ml-64 h-screen flex-grow py-2 min-h-screen bg-gray-400 bg-opacity-20">
+            <div className="divide-y divide-gray-200">{renderContent()}</div>
           </main>
         </div>
       </div>
