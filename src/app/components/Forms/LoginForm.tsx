@@ -2,6 +2,7 @@ import { LoginFormProps } from "@/types/types";
 import LogoNav from "../../../../public/images/logo200px.png";
 import swal from "sweetalert";
 import Image from "next/image";
+import { LOGIN_URL } from "../../../../config/consts";
 
 export default function LoginForm({
   token,
@@ -17,7 +18,7 @@ export default function LoginForm({
   const submitHandler = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3001/auth/login`, {
+    fetch(`${LOGIN_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
