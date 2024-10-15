@@ -24,7 +24,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${localStorage.getItem("userToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
       body: JSON.stringify(newClient),
     })
