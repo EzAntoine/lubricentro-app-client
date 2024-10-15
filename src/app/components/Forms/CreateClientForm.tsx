@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { URL } from "../../../../config/consts";
 
 export default function CreateClientForm({ setFormOpen, fetchClients }) {
   const [newClient, setNewClient] = useState({
@@ -19,11 +20,11 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3001/clients`, {
+    fetch(`${URL}/clients`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${localStorage.getItem("userToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
       body: JSON.stringify(newClient),
     })
