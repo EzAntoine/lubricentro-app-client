@@ -4,10 +4,12 @@ import Services from "./components/Services/Services";
 import AboutUs from "./components/About/AboutUs";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 export default function Home() {
   return (
-    <div className="bg-hero-image min-h-screen bg-cover bg-center">
+    <div>
       <Head>
         <title>Lubricentro Maceratesi</title>
         <meta name="Lubricentro Maceratesi" content="" />
