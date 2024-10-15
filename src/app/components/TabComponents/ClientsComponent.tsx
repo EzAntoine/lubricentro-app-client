@@ -66,7 +66,9 @@ const ClientsComponent = () => {
             />
           </div>
           {clients.length === 0 ? (
-            <p className="ml-4">No hay clientes disponibles.</p>
+            <p className="py-6 text-lg bg-[#2d2c2d] bg-opacity-80 text-center">
+              No hay clientes disponibles.
+            </p>
           ) : (
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
