@@ -46,6 +46,11 @@ const OrdersComponent = () => {
     setFormOpen(true);
   };
 
+  const handleStatusChange = (e) => {
+    console.log("Nuevo status: " + e.target.value);
+    //Aca hacer un Post con el nuevo status para editar.
+  };
+
   return (
     <>
       {formOpen ? (
@@ -99,7 +104,7 @@ const OrdersComponent = () => {
                       {new Date(item.date).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {item.clientId} {/* Buscar nombre de cliente. */}
+                      {item.clientName} {/* Buscar nombre de cliente. */}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {item.vehiclePlate}
@@ -111,9 +116,34 @@ const OrdersComponent = () => {
                       {item.price}
                     </td>
                     <td className="flex justify-end mx-auto mr-4">
-                      <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                      {/* <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
                         Desplegable
-                      </button>
+                      </button> */}
+                      <select
+                        id="status"
+                        name="status"
+                        value={item.status}
+                        onChange={handleStatusChange}
+                        className="mt-2 px-2 py-1 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+                      >
+                        {
+                          <option key={item.status} value={item.status}>
+                            {item.status}
+                          </option>
+                        }
+                        {item.status !== "Pendiente" && (
+                          <option value="Pendiente">Pendiente</option>
+                        )}
+                        {item.status !== "Realizado" && (
+                          <option value="Realizado">Realizado</option>
+                        )}
+                        {item.status !== "Terminado" && (
+                          <option value="Terminado">Terminado</option>
+                        )}
+                        {item.status !== "Demorado" && (
+                          <option value="Demorado">Demorado</option>
+                        )}
+                      </select>
                       <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
                         <EyeIcon className="w-5 h-5" />
                       </button>
