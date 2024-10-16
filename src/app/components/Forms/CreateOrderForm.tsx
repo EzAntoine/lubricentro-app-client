@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { URL } from "../../../../config/consts";
+
+interface Client {
+  _id: string;
+  name: string;
+  surname: string;
+  phone: string;
+  email: string;
+  detail: string;
+}
 
 export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
   const [newOrder, setNewOrder] = useState({
@@ -11,6 +20,30 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     price: "",
     status: "Pendiente",
   });
+  const [clients, setClients] = useState<Client[]>([]);
+  const [selectedClient, setSelectedClient] = useState<Client>();
+
+  useEffect(() => {
+    if (!selectedClient) {
+      fetch(`${URL}/clients`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener clientes");
+          }
+          const data = await response.json();
+          setClients(data.data);
+        })
+        .catch((error) => {
+          setClients([]);
+        });
+    }
+  }, [selectedClient]);
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -68,15 +101,17 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             >
               Cliente:
             </label>
-            <input
-              type="text"
-              id="clientId"
-              name="clientId"
-              required
-              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-              onChange={inputHandler}
-              value={newOrder.clientId}
-            />
+            <select className="w-full py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded">
+              {clients.length === 0 ? (
+                <option disabled>No hay clientes disponibles.</option>
+              ) : (
+                clients.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name + " " + item.surname}
+                  </option>
+                ))
+              )}
+            </select>
           </div>
           <div className="mb-2">
             <label
