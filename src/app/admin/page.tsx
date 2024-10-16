@@ -33,14 +33,14 @@ export default function AdminHome() {
   }, []);
 
   return (
-    <div className="bg-hero-image min-h-screen bg-cover bg-center">
+    <div className="bg-hero-image h-screen bg-cover bg-center bg-fixed">
       <Head>
         <title>Lubricentro Maceratesi - Panel Administrativo</title>
         <meta name="Lubricentro Maceratesi" content="" />
         <link rel="preload" href="/images/herramientas.jpg" as="image" />
       </Head>
 
-      <main className="flex min-h-screen flex-col bg-[#2d2c2d] bg-opacity-70">
+      <main className="flex h-screen flex-col bg-[#2d2c2d] bg-opacity-50">
         {loading ? (
           <div
             role="status"

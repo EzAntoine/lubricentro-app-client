@@ -70,51 +70,53 @@ const ClientsComponent = () => {
               No hay clientes disponibles.
             </p>
           ) : (
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
-                    Nombre
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
-                    Telefono
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
-                    Detalles
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
-                </tr>
-              </thead>
-              <tbody className="bg-[#2d2c2d] bg-opacity-80 divide-y divide-gray-200 min-h-screen">
-                {clients.map((item) => (
-                  <tr key={item._id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {item.name + " " + item.surname}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {item.phone}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {item.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {item.detail}
-                    </td>
-                    <td className="flex justify-end mx-auto mr-4">
-                      <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
-                        <EyeIcon className="w-5 h-5" />
-                      </button>
-                      <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
-                        <PencilSquareIcon className="w-5 h-5" />
-                      </button>
-                    </td>
+            <div className="overflow-y-auto max-h-[500px]">
+              <table className="w-full h-full divide-y divide-gray-200 bg-[#2d2c2d] bg-opacity-80">
+                <thead>
+                  <tr>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                      Nombre
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                      Telefono
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                      Email
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                      Detalles
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-200 min-h-screen">
+                  {clients.map((item) => (
+                    <tr key={item._id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.name + " " + item.surname}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.phone}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.email}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.detail}
+                      </td>
+                      <td className="flex justify-end mx-auto mr-4">
+                        <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                          <EyeIcon className="w-5 h-5" />
+                        </button>
+                        <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                          <PencilSquareIcon className="w-5 h-5" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       )}
