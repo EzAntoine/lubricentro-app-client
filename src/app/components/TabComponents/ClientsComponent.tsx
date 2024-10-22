@@ -4,6 +4,7 @@ import CreateClientForm from "../Forms/CreateClientForm";
 import { URL } from "../../../../config/consts";
 import Loading from "../Loader/Loading";
 import SortButton from "../Buttons/SortButton";
+import SearchBar from "../Buttons/SearchBar";
 interface Client {
   _id: string;
   name: string;
@@ -16,6 +17,7 @@ interface Client {
 const ClientsComponent = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [clients, setClients] = useState<Client[]>([]);
+  const [clientsFiltered, setClientsFiltered] = useState<Client[]>([]);
 
   const fetchClients = async () => {
     await fetch(`${URL}/clients`, {
@@ -31,6 +33,7 @@ const ClientsComponent = () => {
         }
         const data = await response.json();
         setClients(data.data);
+        setClientsFiltered(data.data);
       })
       .catch((error) => {
         swal("Error al obtener clientes", "", "error");
@@ -47,13 +50,23 @@ const ClientsComponent = () => {
 
   const handleSort = (option: string) => {
     if (option === "az") {
-      const sortedClients = [...clients].sort((a, b) =>
+      const sortedClients = [...clientsFiltered].sort((a, b) =>
         a.surname.toLowerCase().localeCompare(b.surname.toLowerCase())
       );
-      setClients(sortedClients);
+      setClientsFiltered(sortedClients);
     } else {
       fetchClients();
     }
+  };
+
+  const onSearch = (searchText: string) => {
+    const filteredClients = clients.filter((client) =>
+      Object.values(client).some((value) =>
+        String(value).toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+
+    setClientsFiltered(filteredClients);
   };
 
   return (
@@ -78,14 +91,10 @@ const ClientsComponent = () => {
                 <div className="mr-2 rounded">
                   <SortButton onSort={handleSort} />
                 </div>
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  className="p-1 rounded"
-                />
+                <SearchBar onSearch={onSearch} />
               </div>
             </div>
-            {clients.length === 0 ? (
+            {clientsFiltered.length === 0 ? (
               <p className="py-6 text-lg bg-[#2d2c2d] bg-opacity-80 text-center">
                 No hay clientes disponibles.
               </p>
@@ -110,7 +119,7 @@ const ClientsComponent = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 min-h-screen">
-                    {clients.map((item) => (
+                    {clientsFiltered.map((item) => (
                       <tr key={item._id}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           {item.surname + " " + item.name}
