@@ -16,6 +16,7 @@ interface Client {
 const ClientsComponent = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [clients, setClients] = useState<Client[]>([]);
+
   const fetchClients = async () => {
     await fetch(`${URL}/clients`, {
       method: "GET",
@@ -44,6 +45,17 @@ const ClientsComponent = () => {
     setFormOpen(true);
   };
 
+  const handleSort = (option: string) => {
+    if (option === "az") {
+      const sortedClients = [...clients].sort((a, b) =>
+        a.surname.toLowerCase().localeCompare(b.surname.toLowerCase())
+      );
+      setClients(sortedClients);
+    } else {
+      fetchClients();
+    }
+  };
+
   return (
     <>
       {formOpen ? (
@@ -64,7 +76,7 @@ const ClientsComponent = () => {
               </button>
               <div className="flex items-center">
                 <div className="mr-2 rounded">
-                  <SortButton />
+                  <SortButton onSort={handleSort} />
                 </div>
                 <input
                   type="text"
@@ -101,7 +113,7 @@ const ClientsComponent = () => {
                     {clients.map((item) => (
                       <tr key={item._id}>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          {item.name + " " + item.surname}
+                          {item.surname + " " + item.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           {item.phone}

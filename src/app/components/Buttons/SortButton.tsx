@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const SortButton = () => {
+const SortButton = ({ onSort }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -13,12 +13,20 @@ const SortButton = () => {
   useEffect(() => {
     // Agregar el evento de clic
     document.addEventListener("mousedown", handleClickOutside);
-
     // Limpiar el evento al desmontar el componente
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleSort = (option: string) => {
+    if (option === "az") {
+      onSort("az");
+    } else {
+      onSort("default");
+    }
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative inline-block text-left">
@@ -33,13 +41,13 @@ const SortButton = () => {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke="currentColor"
           className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
           />
         </svg>
@@ -58,23 +66,16 @@ const SortButton = () => {
             <button
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 w-full text-left"
               role="menuitem"
-              onClick={() => console.log("Ordenar A-Z")}
+              onClick={() => handleSort("az")}
             >
               A-Z
             </button>
             <button
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 w-full text-left"
               role="menuitem"
-              onClick={() => console.log("Fecha: Más reciente")}
+              onClick={() => handleSort("recent")}
             >
-              Fecha: Más reciente
-            </button>
-            <button
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 w-full text-left"
-              role="menuitem"
-              onClick={() => console.log("Fecha: Más antiguo")}
-            >
-              Fecha: Más antiguo
+              Más recientes
             </button>
           </div>
         </div>
