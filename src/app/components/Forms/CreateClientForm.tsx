@@ -54,6 +54,11 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       });
   };
 
+  const cancelHandler = (e) => {
+    e.preventDefault();
+    setFormOpen(false);
+  };
+
   return (
     <div className="-mt-10 flex flex-col items-center justify-center min-h-screen">
       <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
@@ -161,10 +166,17 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
             />
           </div>
 
-          <div>
+          <div className="flex">
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+              className="w-full m-2 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 transition duration-200"
+              onClick={cancelHandler}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="w-full m-2 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
             >
               Crear cliente
             </button>
