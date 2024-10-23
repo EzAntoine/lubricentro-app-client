@@ -2,6 +2,9 @@ import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import CreateOrderForm from "../Forms/CreateOrderForm";
 import { URL } from "../../../../config/consts";
+import SearchBar from "../Buttons/SearchBar";
+import search from "../resources/SearchFunctions";
+import StatusFilterButton from "../Buttons/StatusFilterButton";
 interface Order {
   _id: string;
   date: Date;
@@ -17,6 +20,7 @@ interface Order {
 const OrdersComponent = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [ordersFiltered, setOrdersFiltered] = useState<Order[]>([]);
 
   const fetchOrders = async () => {
     await fetch(`${URL}/orders`, {
@@ -32,6 +36,7 @@ const OrdersComponent = () => {
         }
         const data = await response.json();
         setOrders(data.data);
+        setOrdersFiltered(data.data);
       })
       .catch((error) => {
         swal("Error al obtener ordenes", "", "error");
@@ -51,6 +56,22 @@ const OrdersComponent = () => {
     //Aca hacer un Post con el nuevo status para editar.
   };
 
+  const onSearch = (searchText: string) => {
+    search(searchText, orders, setOrdersFiltered);
+  };
+
+  const filterStatus = (status: string) => {
+    if (status === "Todos") {
+      setOrdersFiltered(orders);
+    } else {
+      const ordersByStatus = orders.filter(
+        (order) =>
+          order.status && status.toLowerCase() === order.status.toLowerCase()
+      );
+      setOrdersFiltered(ordersByStatus);
+    }
+  };
+
   return (
     <>
       {formOpen ? (
@@ -65,13 +86,15 @@ const OrdersComponent = () => {
             >
               Nueva Orden
             </button>
-            <input
-              type="text"
-              placeholder="Buscar..."
-              className="p-1 rounded"
-            />
+            <div className="flex items-center">
+              <div className="mr-4 rounded">
+                <div className="inline-flex mr-2">Filtrar por estado:</div>
+                <StatusFilterButton filterStatus={filterStatus} />
+              </div>
+              <SearchBar onSearch={onSearch} />
+            </div>
           </div>
-          {orders.length === 0 ? (
+          {ordersFiltered.length === 0 ? (
             <p className="py-6 text-lg bg-[#2d2c2d] bg-opacity-80 text-center">
               No hay ordenes disponibles.
             </p>
@@ -98,7 +121,7 @@ const OrdersComponent = () => {
                 </tr>
               </thead>
               <tbody className="bg-[#2d2c2d] bg-opacity-80 divide-y divide-gray-200 min-h-screen">
-                {orders.map((item) => (
+                {ordersFiltered.map((item) => (
                   <tr key={item._id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {new Date(item.date).toLocaleDateString()}
@@ -137,8 +160,8 @@ const OrdersComponent = () => {
                         {item.status !== "Realizado" && (
                           <option value="Realizado">Realizado</option>
                         )}
-                        {item.status !== "Terminado" && (
-                          <option value="Terminado">Terminado</option>
+                        {item.status !== "Retirado" && (
+                          <option value="Retirado">Retirado</option>
                         )}
                         {item.status !== "Demorado" && (
                           <option value="Demorado">Demorado</option>

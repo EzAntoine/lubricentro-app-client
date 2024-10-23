@@ -33,7 +33,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleSearch} className="ml-2">
+      <button onClick={handleSearch} className="ml-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

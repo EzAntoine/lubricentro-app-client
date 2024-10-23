@@ -5,6 +5,7 @@ import { URL } from "../../../../config/consts";
 import Loading from "../Loader/Loading";
 import SortButton from "../Buttons/SortButton";
 import SearchBar from "../Buttons/SearchBar";
+import search from "../resources/SearchFunctions";
 interface Client {
   _id: string;
   name: string;
@@ -60,13 +61,7 @@ const ClientsComponent = () => {
   };
 
   const onSearch = (searchText: string) => {
-    const filteredClients = clients.filter((client) =>
-      Object.values(client).some((value) =>
-        String(value).toLowerCase().includes(searchText.toLowerCase())
-      )
-    );
-
-    setClientsFiltered(filteredClients);
+    search(searchText, clients, setClientsFiltered);
   };
 
   return (
@@ -88,7 +83,7 @@ const ClientsComponent = () => {
                 Nuevo Cliente
               </button>
               <div className="flex items-center">
-                <div className="mr-2 rounded">
+                <div className="mr-4 rounded">
                   <SortButton onSort={handleSort} />
                 </div>
                 <SearchBar onSearch={onSearch} />
