@@ -4,6 +4,7 @@ import CreateOrderForm from "../Forms/CreateOrderForm";
 import { URL } from "../../../../config/consts";
 import SearchBar from "../Buttons/SearchBar";
 import search from "../resources/SearchFunctions";
+import StatusFilterButton from "../Buttons/StatusFilterButton";
 interface Order {
   _id: string;
   date: Date;
@@ -59,6 +60,18 @@ const OrdersComponent = () => {
     search(searchText, orders, setOrdersFiltered);
   };
 
+  const filterStatus = (status: string) => {
+    if (status === "Todos") {
+      setOrdersFiltered(orders);
+    } else {
+      const ordersByStatus = orders.filter(
+        (order) =>
+          order.status && status.toLowerCase() === order.status.toLowerCase()
+      );
+      setOrdersFiltered(ordersByStatus);
+    }
+  };
+
   return (
     <>
       {formOpen ? (
@@ -75,7 +88,8 @@ const OrdersComponent = () => {
             </button>
             <div className="flex items-center">
               <div className="mr-4 rounded">
-                {/* <SortButton onSort={handleSort} /> */}
+                <div className="inline-flex mr-2">Filtrar por estado:</div>
+                <StatusFilterButton filterStatus={filterStatus} />
               </div>
               <SearchBar onSearch={onSearch} />
             </div>
@@ -146,8 +160,8 @@ const OrdersComponent = () => {
                         {item.status !== "Realizado" && (
                           <option value="Realizado">Realizado</option>
                         )}
-                        {item.status !== "Terminado" && (
-                          <option value="Terminado">Terminado</option>
+                        {item.status !== "Retirado" && (
+                          <option value="Retirado">Retirado</option>
                         )}
                         {item.status !== "Demorado" && (
                           <option value="Demorado">Demorado</option>
