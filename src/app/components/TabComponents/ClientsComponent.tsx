@@ -88,7 +88,7 @@ const ClientsComponent = () => {
                 Nuevo Cliente
               </button>
               <div className="flex items-center">
-                <div className="mr-2 rounded">
+                <div className="mr-4 rounded">
                   <SortButton onSort={handleSort} />
                 </div>
                 <SearchBar onSearch={onSearch} />
