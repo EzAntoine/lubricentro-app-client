@@ -5,6 +5,7 @@ import { URL } from "../../../../config/consts";
 import Loading from "../Loader/Loading";
 import SortButton from "../Buttons/SortButton";
 import SearchBar from "../Buttons/SearchBar";
+import search from "../resources/SearchFunctions";
 interface Client {
   _id: string;
   name: string;
@@ -60,13 +61,7 @@ const ClientsComponent = () => {
   };
 
   const onSearch = (searchText: string) => {
-    const filteredClients = clients.filter((client) =>
-      Object.values(client).some((value) =>
-        String(value).toLowerCase().includes(searchText.toLowerCase())
-      )
-    );
-
-    setClientsFiltered(filteredClients);
+    search(searchText, clients, setClientsFiltered);
   };
 
   return (
