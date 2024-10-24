@@ -52,6 +52,9 @@ const OrderDetail = ({ order, onClose }) => {
         <p>
           <strong>Estado:</strong> {order.status}
         </p>
+        <p>
+          <strong>Observaciones:</strong> {order.observations}
+        </p>
       </div>
     </div>
   );

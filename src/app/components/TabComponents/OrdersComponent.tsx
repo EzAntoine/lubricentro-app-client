@@ -16,6 +16,7 @@ interface Order {
   estimateSolution: string;
   price: number;
   status: string;
+  observations: string;
 }
 
 const OrdersComponent = () => {
