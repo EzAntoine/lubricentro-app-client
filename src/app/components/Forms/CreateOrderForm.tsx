@@ -16,7 +16,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     vehiclePlate: "",
     clientId: "",
     failure: "",
-    estimatedSolution: "",
+    estimateSolution: "",
     price: "",
     status: "Pendiente",
   });
@@ -70,7 +70,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
           vehiclePlate: "",
           clientId: "",
           failure: "",
-          estimatedSolution: "",
+          estimateSolution: "",
           price: "",
           status: "Pendiente",
         });
@@ -149,19 +149,19 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
           </div>
           <div className="mb-2">
             <label
-              htmlFor="estimatedSolution"
+              htmlFor="estimateSolution"
               className="block text-sm font-medium text-gray-300"
             >
               Solucion Propuesta:
             </label>
             <input
               type="text"
-              id="estimatedSolution"
-              name="estimatedSolution"
+              id="estimateSolution"
+              name="estimateSolution"
               required
               className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
               onChange={inputHandler}
-              value={newOrder.estimatedSolution}
+              value={newOrder.estimateSolution}
             />
           </div>
           <div className="mb-2">

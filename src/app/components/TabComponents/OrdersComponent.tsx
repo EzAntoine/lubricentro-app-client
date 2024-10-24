@@ -5,6 +5,7 @@ import { URL } from "../../../../config/consts";
 import SearchBar from "../Buttons/SearchBar";
 import search from "../resources/SearchFunctions";
 import StatusFilterButton from "../Buttons/StatusFilterButton";
+import OrderDetail from "../Details/OrderDetail";
 interface Order {
   _id: string;
   date: Date;
@@ -12,15 +13,17 @@ interface Order {
   clientName: string;
   vehiclePlate: string;
   failure: string;
-  estimatedSolution: string;
+  estimateSolution: string;
   price: number;
   status: string;
+  observations: string;
 }
 
 const OrdersComponent = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [ordersFiltered, setOrdersFiltered] = useState<Order[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   const fetchOrders = async () => {
     await fetch(`${URL}/orders`, {
@@ -136,7 +139,7 @@ const OrdersComponent = () => {
                       {item.failure}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {item.price}
+                      {"$ " + item.price}
                     </td>
                     <td className="flex justify-end mx-auto mr-4">
                       {/* <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
@@ -167,7 +170,10 @@ const OrdersComponent = () => {
                           <option value="Demorado">Demorado</option>
                         )}
                       </select>
-                      <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                      <button
+                        className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
+                        onClick={() => setSelectedOrder(item)}
+                      >
                         <EyeIcon className="w-5 h-5" />
                       </button>
                       <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
@@ -180,6 +186,12 @@ const OrdersComponent = () => {
             </table>
           )}
         </div>
+      )}
+      {selectedOrder && (
+        <OrderDetail
+          order={selectedOrder}
+          onClose={() => setSelectedOrder(null)}
+        />
       )}
     </>
   );
