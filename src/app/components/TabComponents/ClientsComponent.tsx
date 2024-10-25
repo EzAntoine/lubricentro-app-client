@@ -94,7 +94,7 @@ const ClientsComponent = () => {
                 No hay clientes disponibles.
               </p>
             ) : (
-              <div className="overflow-y-auto max-h-[500px]">
+              <div className="overflow-y-auto max-h-[570px]">
                 <table className="w-full h-full divide-y divide-gray-200 bg-[#2d2c2d] bg-opacity-80">
                   <thead>
                     <tr>
