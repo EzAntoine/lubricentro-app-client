@@ -31,7 +31,7 @@ const OrderDetail = ({ order, onClose }) => {
           <strong>Cliente:</strong> {order.clientName}
         </p>
         <p>
-          <strong>Telefono:</strong> {/* order.clientPhone */ "+54291111111"}
+          <strong>Telefono:</strong> {order.clientPhone}
         </p>
         <p>
           <strong>Patente:</strong> {order.vehiclePlate}

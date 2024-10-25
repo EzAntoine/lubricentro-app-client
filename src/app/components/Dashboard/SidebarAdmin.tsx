@@ -15,14 +15,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
         >
           Ordenes
         </li>
-        {/* <li
-          onClick={() => setActiveTab("products")}
-          className={`cursor-pointer p-2 rounded-sm ${
-            activeTab === "products" ? "bg-gray-700" : "hover:bg-gray-600"
-          }`}
-        >
-          Productos
-        </li> */}
         <li
           onClick={() => setActiveTab("clients")}
           className={`cursor-pointer p-2 rounded-sm ${
@@ -31,14 +23,22 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
         >
           Clientes
         </li>
-        <li
+        {/* <li
           onClick={() => setActiveTab("vehicles")}
           className={`cursor-pointer p-2 rounded-sm ${
             activeTab === "vehicles" ? "bg-gray-700" : "hover:bg-gray-600"
           }`}
         >
           Vehiculos
-        </li>
+        </li> */}
+        {/* <li
+          onClick={() => setActiveTab("products")}
+          className={`cursor-pointer p-2 rounded-sm ${
+            activeTab === "products" ? "bg-gray-700" : "hover:bg-gray-600"
+          }`}
+        >
+          Productos
+        </li> */}
         <li
           onClick={() => setActiveTab("users")}
           className={`cursor-pointer p-2 rounded-sm ${
