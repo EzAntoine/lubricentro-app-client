@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../../../config/consts";
-
+//import { PlusCircleIcon } from "@heroicons/react/24/outline";
 interface Client {
   _id: string;
   name: string;
@@ -19,6 +19,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     estimateSolution: "",
     price: "",
     status: "Pendiente",
+    observations: "",
   });
   const [clients, setClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState<Client>();
@@ -37,7 +38,10 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             throw new Error("Error al obtener clientes");
           }
           const data = await response.json();
-          setClients(data.data);
+          const clientsSorted = data.data.sort((a, b) =>
+            a.surname.toLowerCase().localeCompare(b.surname.toLowerCase())
+          );
+          setClients(clientsSorted);
         })
         .catch((error) => {
           setClients([]);
@@ -73,6 +77,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
           estimateSolution: "",
           price: "",
           status: "Pendiente",
+          observations: "",
         });
         swal("Orden creada correctamente!", "", "success");
         fetchOrders();
@@ -86,6 +91,27 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
         );
       });
   };
+
+  const clientSelectHandler = (e) => {
+    const selectedId = e.target.value;
+    setSelectedClient(selectedId); // Guardar el ID del cliente seleccionado
+    setNewOrder({ ...newOrder, clientId: selectedId }); // Actualizar el newOrder con el clientId
+  };
+
+  const cancelHandler = () => {
+    setFormOpen(false);
+  };
+
+  const onEscClose = (e) => {
+    if (e.key === "Escape") {
+      cancelHandler();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onEscClose);
+    return () => document.removeEventListener("keydown", onEscClose);
+  }, []);
 
   return (
     <div className="-mt-10 flex flex-col items-center justify-center min-h-screen">
@@ -101,17 +127,28 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             >
               Cliente:
             </label>
-            <select className="w-full py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded">
-              {clients.length === 0 ? (
-                <option disabled>No hay clientes disponibles.</option>
-              ) : (
-                clients.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name + " " + item.surname}
-                  </option>
-                ))
-              )}
-            </select>
+            <div className="w-full inline-flex items-center">
+              <select
+                className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+                onChange={clientSelectHandler}
+              >
+                {clients.length === 0 ? (
+                  <option disabled>No hay clientes disponibles.</option>
+                ) : (
+                  clients.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.surname + " " + item.name}
+                    </option>
+                  ))
+                )}
+              </select>
+              {/* <button
+                className="h-10 w-10 flex items-center justify-center ml-2"
+                title="Nuevo cliente"
+              >
+                <PlusCircleIcon className="h-9 w-9 text-white" />
+              </button> */}
+            </div>
           </div>
           <div className="mb-2">
             <label
@@ -181,10 +218,33 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
               value={newOrder.price}
             />
           </div>
-          <div>
+          <div className="mb-2">
+            <label
+              htmlFor="observations"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Observaciones:
+            </label>
+            <input
+              type="text"
+              id="observations"
+              name="observations"
+              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              onChange={inputHandler}
+              value={newOrder.observations}
+            />
+          </div>
+          <div className="flex">
+            <button
+              type="button"
+              className="w-full m-2 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 transition duration-200"
+              onClick={cancelHandler}
+            >
+              Cancelar
+            </button>
             <button
               type="submit"
-              className="mt-1 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+              className="w-full m-2 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
             >
               Crear orden
             </button>

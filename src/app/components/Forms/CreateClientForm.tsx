@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { URL } from "../../../../config/consts";
 
 export default function CreateClientForm({ setFormOpen, fetchClients }) {
@@ -54,10 +54,20 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       });
   };
 
-  const cancelHandler = (e) => {
-    e.preventDefault();
+  const cancelHandler = () => {
     setFormOpen(false);
   };
+
+  const onEscClose = (e) => {
+    if (e.key === "Escape") {
+      cancelHandler();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onEscClose);
+    return () => document.removeEventListener("keydown", onEscClose);
+  }, []);
 
   return (
     <div className="-mt-10 flex flex-col items-center justify-center min-h-screen">
@@ -168,7 +178,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
 
           <div className="flex">
             <button
-              type="submit"
+              type="button"
               className="w-full m-2 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 transition duration-200"
               onClick={cancelHandler}
             >
