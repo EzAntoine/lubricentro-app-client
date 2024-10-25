@@ -11,9 +11,8 @@ const SortButton = ({ onSort }) => {
   };
 
   useEffect(() => {
-    // Agregar el evento de clic
     document.addEventListener("mousedown", handleClickOutside);
-    // Limpiar el evento al desmontar el componente
+    // Limpia el evento al desmontar el componente
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -42,7 +41,7 @@ const SortButton = ({ onSort }) => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="size-6"
+          className="size-6 ml-2"
         >
           <path
             strokeLinecap="round"
