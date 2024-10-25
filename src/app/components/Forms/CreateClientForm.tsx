@@ -54,14 +54,13 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       });
   };
 
-  const cancelHandler = (e) => {
-    e.preventDefault();
+  const cancelHandler = () => {
     setFormOpen(false);
   };
 
   const onEscClose = (e) => {
     if (e.key === "Escape") {
-      setFormOpen(false);
+      cancelHandler();
     }
   };
 
