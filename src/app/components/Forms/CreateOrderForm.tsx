@@ -87,6 +87,12 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
       });
   };
 
+  const clientSelectHandler = (e) => {
+    const selectedId = e.target.value;
+    setSelectedClient(selectedId); // Guardar el ID del cliente seleccionado
+    setNewOrder({ ...newOrder, clientId: selectedId }); // Actualizar el newOrder con el clientId
+  };
+
   return (
     <div className="-mt-10 flex flex-col items-center justify-center min-h-screen">
       <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
@@ -101,7 +107,10 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             >
               Cliente:
             </label>
-            <select className="w-full py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded">
+            <select
+              className="w-full py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+              onChange={clientSelectHandler}
+            >
               {clients.length === 0 ? (
                 <option disabled>No hay clientes disponibles.</option>
               ) : (
