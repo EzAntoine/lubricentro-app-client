@@ -9,6 +9,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
     email: "",
     phone: "",
     detail: "",
+    createdBy: localStorage.getItem("username"),
     vehicles: [],
   });
 

@@ -21,7 +21,7 @@ const OrderDetail = ({ order, onClose }) => {
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
         </button>
         <h2 className="text-xl font-bold -mt-4 mb-4">
-          Orden de trabajo Nº XXXX
+          Orden de trabajo Nº XXXX {/* order.counter */}
         </h2>
         <p>
           <strong>Fecha de ingreso:</strong>{" "}
@@ -54,6 +54,9 @@ const OrderDetail = ({ order, onClose }) => {
         </p>
         <p>
           <strong>Observaciones:</strong> {order.observations}
+        </p>
+        <p>
+          <strong>Orden creada por:</strong> {order.createdBy}
         </p>
       </div>
     </div>
