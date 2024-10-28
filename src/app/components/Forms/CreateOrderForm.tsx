@@ -20,6 +20,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     price: "",
     status: "Pendiente",
     observations: "",
+    createdBy: localStorage.getItem("username"),
   });
   const [clients, setClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState<Client>();

@@ -43,6 +43,9 @@ const ClientDetail = ({ client, onClose }) => {
         <p>
           <strong>Vehículos:</strong> {vehiclesList}
         </p>
+        <p>
+          <strong>Cliente creado por:</strong> {client.createdBy}
+        </p>
       </div>
     </div>
   );
