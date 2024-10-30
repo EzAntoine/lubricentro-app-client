@@ -6,6 +6,7 @@ import SearchBar from "../Buttons/SearchBar";
 import search from "../resources/SearchFunctions";
 import StatusFilterButton from "../Buttons/StatusFilterButton";
 import OrderDetail from "../Details/OrderDetail";
+import SendOrderButton from "../Buttons/SendOrderButton";
 interface Order {
   _id: string;
   date: Date;
@@ -171,6 +172,7 @@ const OrdersComponent = () => {
                             <option value="Demorado">Demorado</option>
                           )}
                         </select>
+                        <SendOrderButton order={item} />
                         <button
                           className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
                           onClick={() => setSelectedOrder(item)}
