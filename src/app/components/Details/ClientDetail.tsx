@@ -1,4 +1,8 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  XMarkIcon,
+  ChatBubbleOvalLeftIcon,
+  EnvelopeIcon,
+} from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 
 const ClientDetail = ({ client, onClose }) => {
@@ -31,11 +35,25 @@ const ClientDetail = ({ client, onClose }) => {
         <p>
           <strong>DNI:</strong> {client.dni}
         </p>
-        <p>
+        <p className="flex items-center">
           <strong>Teléfono</strong> {client.phone}
+          <button
+            onClick={() =>
+              window.open(`https://wa.me/${client.phone}`, "_blank")
+            }
+            className="mb-1 ml-2 h-5 w-5"
+          >
+            <ChatBubbleOvalLeftIcon />
+          </button>
         </p>
-        <p>
+        <p className="flex items-center">
           <strong>Email:</strong> {client.email}
+          <button
+            onClick={() => window.open(`mailto:${client.email}`, "_blank")}
+            className="mb-1 ml-2 h-5 w-5"
+          >
+            <EnvelopeIcon />
+          </button>
         </p>
         <p>
           <strong>Detalle:</strong> {client.detail}
