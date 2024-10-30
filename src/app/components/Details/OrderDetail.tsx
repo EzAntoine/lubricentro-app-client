@@ -1,4 +1,4 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 
 const OrderDetail = ({ order, onClose }) => {
@@ -30,8 +30,16 @@ const OrderDetail = ({ order, onClose }) => {
         <p>
           <strong>Cliente:</strong> {order.clientName}
         </p>
-        <p>
+        <p className="flex items-center">
           <strong>Telefono:</strong> {order.clientPhone}
+          <button
+            onClick={() =>
+              window.open(`https://wa.me/${order.clientPhone}`, "_blank")
+            }
+            className="mb-1 ml-2 h-5 w-5"
+          >
+            <ChatBubbleOvalLeftIcon />
+          </button>
         </p>
         <p>
           <strong>Patente:</strong> {order.vehiclePlate}
