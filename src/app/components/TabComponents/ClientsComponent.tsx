@@ -1,8 +1,7 @@
 import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateClientForm from "../Forms/CreateClientForm";
 import { URL } from "../../../../config/consts";
-import Loading from "../Loader/Loading";
 import SortButton from "../Buttons/SortButton";
 import SearchBar from "../Buttons/SearchBar";
 import search from "../resources/SearchFunctions";

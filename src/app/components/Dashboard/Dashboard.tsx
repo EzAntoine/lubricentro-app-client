@@ -14,7 +14,6 @@ export default function Dashboard({
   setUserData,
 }: LoginFormProps) {
   const [activeTab, setActiveTab] = useState("orders");
-  const [data, setData] = useState([]);
 
   /* useEffect(() => {
     const fetchData = async () => {
@@ -34,9 +33,9 @@ export default function Dashboard({
       case "clients":
         return <ClientsComponent />;
       case "users":
-        return <UsersComponent data={data} />;
-      case "vehicles":
-        return <VehiclesComponent data={data} />;
+        return <UsersComponent />;
+      /* case "vehicles":
+        return <VehiclesComponent data={data} />; */
       default:
         return null;
     }
