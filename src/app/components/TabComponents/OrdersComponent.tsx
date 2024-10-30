@@ -103,7 +103,7 @@ const OrdersComponent = () => {
             </p>
           ) : (
             <div className="overflow-y-auto max-h-[570px]">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="w-full h-full divide-y divide-gray-200 bg-[#2d2c2d] bg-opacity-80">
                 <thead>
                   <tr>
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
@@ -124,7 +124,7 @@ const OrdersComponent = () => {
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
                   </tr>
                 </thead>
-                <tbody className="bg-[#2d2c2d] bg-opacity-80 divide-y divide-gray-200 min-h-screen">
+                <tbody className="divide-y divide-gray-200 min-h-screen">
                   {ordersFiltered.map((item) => (
                     <tr key={item._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
