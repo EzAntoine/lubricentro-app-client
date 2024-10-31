@@ -4,7 +4,7 @@ const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
   const [vehicle, setVehicle] = useState({
     plate: "",
     brand: "",
-    model: "",
+    modelo: "",
     year: "",
     details: "",
   });
@@ -63,11 +63,10 @@ const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
           </label>
           <input
             type="text"
-            name="model"
-            placeholder="Modelo"
+            name="modelo"
             className="mt-1 mb-2 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
             onChange={handleChange}
-            value={vehicle.model}
+            value={vehicle.modelo}
             required
           />
           <label

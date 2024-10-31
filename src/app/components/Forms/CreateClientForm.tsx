@@ -228,7 +228,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
               </label>
               <div className="inline-flex w-full">
                 <select
-                  className="mt-1 w-4/5 p-2 border text-black border-gray-300 rounded-md"
+                  className="mt-1 w-9/10 p-2 border text-black border-gray-300 rounded-md"
                   defaultValue=""
                   disabled={!newClient.vehicles.length} // Deshabilitar si no hay vehículos
                 >
@@ -237,7 +237,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
                   </option>
                   {newClient.vehicles.map((vehicle, index) => (
                     <option key={index} value={vehicle.plate}>
-                      {`${vehicle.brand} ${vehicle.modelo} (${vehicle.year}) - ${vehicle.plate}`}
+                      {`[${vehicle.plate}] ${vehicle.brand} ${vehicle.modelo} (${vehicle.year})`}
                     </option>
                   ))}
                 </select>
