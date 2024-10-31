@@ -8,6 +8,28 @@ interface Client {
   phone: string;
   email: string;
   detail: string;
+  vehicles: Vehicle[];
+}
+
+interface Vehicle {
+  plate: string;
+  ownerId: string;
+  brand: string;
+  modelo: string;
+  year: string;
+  details: string;
+  orders: Order[];
+}
+
+interface Order {
+  date: Date;
+  vehiclePlate: string;
+  clientId: string;
+  failure: string;
+  estimateSolution: string;
+  price: number;
+  status: string;
+  observations: string;
 }
 
 export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
@@ -43,6 +65,28 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             a.surname.toLowerCase().localeCompare(b.surname.toLowerCase())
           );
           setClients(clientsSorted);
+        })
+        .catch((error) => {
+          setClients([]);
+        });
+    }
+  }, [selectedClient]);
+
+  useEffect(() => {
+    if (selectedClient) {
+      fetch(`${URL}/clients/${selectedClient._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener clientes");
+          }
+          const data = await response.json();
+          const client = data.data;
         })
         .catch((error) => {
           setClients([]);
@@ -95,7 +139,25 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
 
   const clientSelectHandler = (e) => {
     const selectedId = e.target.value;
-    setSelectedClient(selectedId); // Guardar el ID del cliente seleccionado
+
+    fetch(`${URL}/clients/${selectedId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener clientes");
+        }
+        const data = await response.json();
+        setSelectedClient(data.data);
+      })
+      .catch((error) => {
+        //setSelectedClient('');
+      });
+
     setNewOrder({ ...newOrder, clientId: selectedId }); // Actualizar el newOrder con el clientId
   };
 
@@ -158,7 +220,29 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             >
               Patente:
             </label>
-            <input
+            <div className="w-full inline-flex items-center">
+              <select
+                className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+                //onChange={plateSelectHandler}
+              >
+                {selectedClient ? (
+                  selectedClient.vehicles.length === 0 ? (
+                    <option disabled>
+                      El cliente no tiene vehículos agregados.
+                    </option>
+                  ) : (
+                    selectedClient.vehicles.map((item) => (
+                      <option key={item.plate} value={item.plate}>
+                        {item.plate}
+                      </option>
+                    ))
+                  )
+                ) : (
+                  <option disabled>No hay cliente seleccionado.</option>
+                )}
+              </select>
+            </div>
+            {/* <input
               type="text"
               id="vehiclePlate"
               name="vehiclePlate"
@@ -166,7 +250,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
               className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
               onChange={inputHandler}
               value={newOrder.vehiclePlate}
-            />
+            /> */}
           </div>
           <div className="mb-2">
             <label
