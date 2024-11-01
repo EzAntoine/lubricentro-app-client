@@ -5,7 +5,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab, activeTab }) => {
   return (
-    <aside className="w-64 bg-[#2d2c2d] bg-opacity-100 h-full p-4">
+    <aside className="w-50 bg-[#2d2c2d] bg-opacity-100 h-full p-4">
       <ul>
         <li
           onClick={() => setActiveTab("orders")}

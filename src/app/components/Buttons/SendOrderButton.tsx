@@ -28,7 +28,7 @@ const SendOrderButton = ({ order }) => {
   return (
     <button
       onClick={clickHandler}
-      className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm mt-2 ml-2 p-2 bg-[#1a7742] text-white text-sm font-medium hover:bg-[#15793a] transition duration-200"
+      className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm mt-2 mx-2 px-1 py-1 bg-[#1a7742] text-white text-sm font-medium hover:bg-[#15793a] transition duration-200"
     >
       Enviar
       {/* <ArrowRightIcon className="ml-2 w-5 h-5" />
