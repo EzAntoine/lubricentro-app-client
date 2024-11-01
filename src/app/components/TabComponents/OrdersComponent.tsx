@@ -144,15 +144,19 @@ const OrdersComponent = () => {
                         {"$ " + item.price}
                       </td>
                       <td className="flex justify-end mx-auto mr-4">
-                        {/* <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
-                        Desplegable
-                      </button> */}
+                        <button
+                          className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
+                          onClick={() => setSelectedOrder(item)}
+                        >
+                          <EyeIcon className="w-5 h-5" />
+                        </button>
+                        <SendOrderButton order={item} />
                         <select
                           id="status"
                           name="status"
                           value={item.status}
                           onChange={handleStatusChange}
-                          className="mt-2 px-2 py-1 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+                          className="mt-2 px-1 py-1 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
                         >
                           {
                             <option key={item.status} value={item.status}>
@@ -172,16 +176,9 @@ const OrdersComponent = () => {
                             <option value="Demorado">Demorado</option>
                           )}
                         </select>
-                        <SendOrderButton order={item} />
-                        <button
-                          className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
-                          onClick={() => setSelectedOrder(item)}
-                        >
-                          <EyeIcon className="w-5 h-5" />
-                        </button>
-                        <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                        {/* <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
                           <PencilSquareIcon className="w-5 h-5" />
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))}
