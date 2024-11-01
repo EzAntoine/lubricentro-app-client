@@ -13,7 +13,7 @@ const ClientDetail = ({ client, onClose }) => {
             (vehicle) =>
               `[${vehicle.plate}] ${vehicle.brand} ${vehicle.modelo} (${vehicle.year})`
           )
-          .join(", ")
+          .join(" -- ")
       : "No hay vehículos asignados.";
 
   const onEscClose = (e) => {
@@ -28,8 +28,7 @@ const ClientDetail = ({ client, onClose }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed inset-0 bg-black opacity-50"></div>
+    <div className="fixed inset-0 flex items-center justify-center z-50 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div className="bg-gray-200 text-black rounded-lg shadow-lg p-6 relative">
         <button onClick={onClose}>
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
