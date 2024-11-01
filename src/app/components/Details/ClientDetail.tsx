@@ -8,7 +8,12 @@ import { useEffect } from "react";
 const ClientDetail = ({ client, onClose }) => {
   const vehiclesList =
     client.vehicles.length > 0
-      ? client.vehicles.join(", ")
+      ? client.vehicles[0]
+          .map(
+            (vehicle) =>
+              `[${vehicle.plate}] ${vehicle.brand} ${vehicle.modelo} (${vehicle.year})`
+          )
+          .join(", ")
       : "No hay vehículos asignados.";
 
   const onEscClose = (e) => {
@@ -36,7 +41,7 @@ const ClientDetail = ({ client, onClose }) => {
           <strong>DNI:</strong> {client.dni}
         </p>
         <p className="flex items-center">
-          <strong>Teléfono</strong> {client.phone}
+          <strong className="mr-2">Teléfono:</strong> {client.phone}
           <button
             onClick={() =>
               window.open(`https://wa.me/${client.phone}`, "_blank")
@@ -47,7 +52,7 @@ const ClientDetail = ({ client, onClose }) => {
           </button>
         </p>
         <p className="flex items-center">
-          <strong>Email:</strong> {client.email}
+          <strong className="mr-2">Email: </strong> {client.email}
           <button
             onClick={() => window.open(`mailto:${client.email}`, "_blank")}
             className="mb-1 ml-2 h-5 w-5"

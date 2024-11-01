@@ -18,6 +18,13 @@ const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
     e.preventDefault();
     addVehicle(vehicle);
     onClose(); // Cierra el popup después de agregar el vehículo
+    setVehicle({
+      plate: "",
+      brand: "",
+      modelo: "",
+      year: "",
+      details: "",
+    });
   };
 
   if (!isOpen) return null;
