@@ -8,7 +8,7 @@ interface Client {
   phone: string;
   email: string;
   detail: string;
-  vehicles: Vehicle[];
+  vehicles: Vehicle[][];
 }
 
 interface Vehicle {
@@ -45,7 +45,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     createdBy: localStorage.getItem("username"),
   });
   const [clients, setClients] = useState<Client[]>([]);
-  const [selectedClient, setSelectedClient] = useState<Client>();
+  const [selectedClient, setSelectedClient] = useState<Client | null>();
 
   useEffect(() => {
     if (!selectedClient) {
@@ -72,7 +72,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     }
   }, [selectedClient]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (selectedClient) {
       fetch(`${URL}/clients/${selectedClient._id}`, {
         method: "GET",
@@ -86,13 +86,14 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             throw new Error("Error al obtener clientes");
           }
           const data = await response.json();
-          const client = data.data;
+          setSelectedClient(data.data);
+          console.log(selectedClient.vehicles);
         })
         .catch((error) => {
           setClients([]);
         });
     }
-  }, [selectedClient]);
+  }, [selectedClient]); */
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -116,13 +117,14 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
         }
         setNewOrder({
           date: new Date().toISOString(),
-          vehiclePlate: "",
           clientId: "",
+          vehiclePlate: "",
           failure: "",
           estimateSolution: "",
           price: "",
           status: "Pendiente",
           observations: "",
+          createdBy: "",
         });
         swal("Orden creada correctamente!", "", "success");
         fetchOrders();
@@ -137,10 +139,10 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
       });
   };
 
-  const clientSelectHandler = (e) => {
+  const clientSelectHandler = async (e) => {
     const selectedId = e.target.value;
 
-    fetch(`${URL}/clients/${selectedId}`, {
+    await fetch(`${URL}/clients/${selectedId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -155,7 +157,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
         setSelectedClient(data.data);
       })
       .catch((error) => {
-        //setSelectedClient('');
+        setSelectedClient(null);
       });
 
     setNewOrder({ ...newOrder, clientId: selectedId }); // Actualizar el newOrder con el clientId
@@ -176,6 +178,13 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
     return () => document.removeEventListener("keydown", onEscClose);
   }, []);
 
+  const plateSelectHandler = (e) => {
+    const selectedPlate = e.target.value;
+    console.log(selectedPlate);
+
+    setNewOrder({ ...newOrder, vehiclePlate: selectedPlate }); // Actualizar el newOrder con el clientId
+  };
+
   return (
     <div className="-mt-10 flex flex-col items-center justify-center min-h-screen">
       <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
@@ -195,6 +204,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                 className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
                 onChange={clientSelectHandler}
               >
+                <option value="">Seleccionar cliente</option>
                 {clients.length === 0 ? (
                   <option disabled>No hay clientes disponibles.</option>
                 ) : (
@@ -223,15 +233,16 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
             <div className="w-full inline-flex items-center">
               <select
                 className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
-                //onChange={plateSelectHandler}
+                onChange={plateSelectHandler}
               >
+                <option value="">Seleccionar vehículo</option>
                 {selectedClient ? (
-                  selectedClient.vehicles.length === 0 ? (
+                  selectedClient.vehicles?.length === 0 ? (
                     <option disabled>
                       El cliente no tiene vehículos agregados.
                     </option>
                   ) : (
-                    selectedClient.vehicles.map((item) => (
+                    selectedClient.vehicles[0]?.map((item) => (
                       <option key={item.plate} value={item.plate}>
                         {item.plate}
                       </option>
@@ -242,15 +253,6 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                 )}
               </select>
             </div>
-            {/* <input
-              type="text"
-              id="vehiclePlate"
-              name="vehiclePlate"
-              required
-              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-              onChange={inputHandler}
-              value={newOrder.vehiclePlate}
-            /> */}
           </div>
           <div className="mb-2">
             <label
