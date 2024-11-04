@@ -2,6 +2,7 @@ import {
   XMarkIcon,
   ChatBubbleOvalLeftIcon,
   EnvelopeIcon,
+  PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import EditClientForm from "../Forms/EditClientForm";
@@ -92,9 +93,10 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
               onClick={() => {
                 setIsEditing(true);
               }}
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+              className="flex mt-2 p-2 text-sm font-medium rounded bg-[#1a7742] text-white hover:bg-green-800 hover:text-white"
             >
               Editar
+              <PencilSquareIcon className="ml-1 w-5 h-5" />
             </button>
           </>
         )}

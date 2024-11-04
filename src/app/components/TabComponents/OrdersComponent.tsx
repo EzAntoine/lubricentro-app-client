@@ -1,4 +1,4 @@
-import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { EyeIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import CreateOrderForm from "../Forms/CreateOrderForm";
 import { URL } from "../../../../config/consts";
