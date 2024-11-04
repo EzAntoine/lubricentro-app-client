@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { URL } from "../../../../config/consts";
 
 const EditOrderForm = ({
+  isEditing,
   setIsEditing,
   editedOrder,
   setEditedOrder,
@@ -38,6 +40,22 @@ const EditOrderForm = ({
       });
     setIsEditing(false);
   };
+
+  useEffect(() => {
+    const onEscClose = (e) => {
+      if (e.key === "Escape") {
+        if (isEditing) {
+          setIsEditing(false);
+        }
+      } else if (e.key === "Enter") {
+        handleSave();
+      }
+    };
+    if (isEditing) {
+      document.addEventListener("keydown", onEscClose);
+    }
+    return () => document.removeEventListener("keydown", onEscClose);
+  }, [isEditing]);
 
   return (
     <div>
