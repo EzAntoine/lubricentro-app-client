@@ -92,16 +92,18 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
     setFormOpen(false);
   };
 
-  const onEscClose = (e) => {
-    if (e.key === "Escape") {
-      cancelHandler();
-    }
-  };
-
   useEffect(() => {
+    const onEscClose = (e) => {
+      if (e.key === "Escape") {
+        cancelHandler();
+      }
+    };
+    if (!isPopupOpen) {
+      document.addEventListener("keydown", onEscClose);
+    }
     document.addEventListener("keydown", onEscClose);
     return () => document.removeEventListener("keydown", onEscClose);
-  }, []);
+  }, [isPopupOpen]);
 
   const addVehicle = (vehicle: Vehicle) => {
     setNewClient((prev) => ({
@@ -272,6 +274,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       </div>
       <CreateVehicleOnClientForm
         isOpen={isPopupOpen}
+        setIsOpen={setIsPopupOpen}
         onClose={() => setIsPopupOpen(false)}
         addVehicle={addVehicle}
       />

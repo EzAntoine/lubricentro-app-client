@@ -11,16 +11,18 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
   const [editedOrder, setEditedOrder] = useState(order);
   const [actualOrder, setActualOrder] = useState(order);
 
-  const onEscClose = (e) => {
-    if (e.key === "Escape") {
-      onClose();
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener("keydown", onEscClose);
+    const onEscClose = (e) => {
+      e.preventDefault();
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    if (!isEditing) {
+      document.addEventListener("keydown", onEscClose);
+    }
     return () => document.removeEventListener("keydown", onEscClose);
-  }, []);
+  }, [isEditing]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -33,6 +35,7 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
 
         {isEditing ? (
           <EditOrderForm
+            isEditing={isEditing}
             setIsEditing={setIsEditing}
             editedOrder={editedOrder}
             setEditedOrder={setEditedOrder}
