@@ -3,9 +3,14 @@ import {
   ChatBubbleOvalLeftIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import EditClientForm from "../Forms/EditClientForm";
 
-const ClientDetail = ({ client, onClose }) => {
+const ClientDetail = ({ client, onClose, fetchClients }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [actualClient, setActualClient] = useState(client);
+  const [editedClient, setEditedClient] = useState(client);
+
   const vehiclesList =
     client.vehicles.length > 0
       ? client.vehicles[0]
@@ -18,6 +23,7 @@ const ClientDetail = ({ client, onClose }) => {
 
   const onEscClose = (e) => {
     if (e.key === "Escape") {
+      fetchClients();
       onClose();
     }
   };
@@ -34,40 +40,64 @@ const ClientDetail = ({ client, onClose }) => {
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
         </button>
         <h2 className="text-xl font-bold -mt-4 mb-4 underline">
-          {client.name + " " + client.surname}
+          {actualClient.name + " " + actualClient.surname}
         </h2>
-        <p>
-          <strong>DNI:</strong> {client.dni}
-        </p>
-        <p className="flex items-center">
-          <strong className="mr-2">Teléfono:</strong> {client.phone}
-          <button
-            onClick={() =>
-              window.open(`https://wa.me/${client.phone}`, "_blank")
-            }
-            className="mb-1 ml-2 h-5 w-5"
-          >
-            <ChatBubbleOvalLeftIcon />
-          </button>
-        </p>
-        <p className="flex items-center">
-          <strong className="mr-2">Email: </strong> {client.email}
-          <button
-            onClick={() => window.open(`mailto:${client.email}`, "_blank")}
-            className="mb-1 ml-2 h-5 w-5"
-          >
-            <EnvelopeIcon />
-          </button>
-        </p>
-        <p>
-          <strong>Detalle:</strong> {client.detail}
-        </p>
-        <p>
-          <strong>Vehículos:</strong> {vehiclesList}
-        </p>
-        <p>
-          <strong>Cliente creado por:</strong> {client.createdBy}
-        </p>
+
+        {isEditing ? (
+          <EditClientForm
+            setIsEditing={setIsEditing}
+            editedClient={editedClient}
+            setEditedClient={setEditedClient}
+            setActualClient={setActualClient}
+            fetchClients={fetchClients}
+          />
+        ) : (
+          <>
+            <p>
+              <strong>DNI:</strong> {actualClient.dni}
+            </p>
+            <p className="flex items-center">
+              <strong className="mr-2">Teléfono:</strong> {actualClient.phone}
+              <button
+                onClick={() =>
+                  window.open(`https://wa.me/${actualClient.phone}`, "_blank")
+                }
+                className="mb-1 ml-2 h-5 w-5"
+              >
+                <ChatBubbleOvalLeftIcon />
+              </button>
+            </p>
+            <p className="flex items-center">
+              <strong className="mr-2">Email: </strong> {actualClient.email}
+              <button
+                onClick={() =>
+                  window.open(`mailto:${actualClient.email}`, "_blank")
+                }
+                className="mb-1 ml-2 h-5 w-5"
+              >
+                <EnvelopeIcon />
+              </button>
+            </p>
+            <p>
+              <strong>Detalle:</strong> {actualClient.detail}
+            </p>
+            <p>
+              <strong>Vehículos:</strong> {vehiclesList}
+            </p>
+            <p>
+              <strong>Cliente creado por:</strong> {actualClient.createdBy}
+            </p>
+            {/* Botón para editar */}
+            <button
+              onClick={() => {
+                setIsEditing(true);
+              }}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Editar
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

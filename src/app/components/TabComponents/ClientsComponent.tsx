@@ -44,7 +44,7 @@ const ClientsComponent = () => {
 
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [formOpen]);
 
   const clickHandler = (e) => {
     setFormOpen(true);
@@ -150,7 +150,11 @@ const ClientsComponent = () => {
       {selectedClient && (
         <ClientDetail
           client={selectedClient}
-          onClose={() => setSelectedClient(null)}
+          onClose={() => {
+            setSelectedClient(null);
+            fetchClients();
+          }}
+          fetchClients={fetchClients}
         />
       )}
     </>
