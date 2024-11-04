@@ -102,16 +102,16 @@ const EditClientForm = ({
           />
         </label>
       </div>
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-between mt-4">
         <button
           onClick={() => setIsEditing(false)}
-          className="mr-2 bg-red-500 text-white px-4 py-2 rounded"
+          className="mr-2 bg-red-800 hover:bg-[#72241d] text-white px-4 py-2 rounded"
         >
           Cancelar
         </button>
         <button
           onClick={handleSave}
-          className="bg-green-500 text-white px-4 py-2 rounded"
+          className="bg-green-600 hover:bg-[#1a7742] text-white px-4 py-2 rounded"
         >
           Confirmar
         </button>

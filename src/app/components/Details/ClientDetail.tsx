@@ -93,7 +93,7 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
               onClick={() => {
                 setIsEditing(true);
               }}
-              className="flex mt-2 p-2 text-sm font-medium rounded bg-[#1a7742] text-white hover:bg-green-800 hover:text-white"
+              className="flex mt-2 p-2 text-sm font-medium rounded bg-green-600 text-white hover:bg-[#1a7742] hover:text-white"
             >
               Editar
               <PencilSquareIcon className="ml-1 w-5 h-5" />
