@@ -22,17 +22,18 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
           .join(" -- ")
       : "No hay vehículos asignados.";
 
-  const onEscClose = (e) => {
-    if (e.key === "Escape") {
-      fetchClients();
-      onClose();
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener("keydown", onEscClose);
+    const onEscClose = (e) => {
+      e.preventDefault();
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    if (!isEditing) {
+      document.addEventListener("keydown", onEscClose);
+    }
     return () => document.removeEventListener("keydown", onEscClose);
-  }, []);
+  }, [isEditing]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -46,6 +47,7 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
 
         {isEditing ? (
           <EditClientForm
+            isEditing={isEditing}
             setIsEditing={setIsEditing}
             editedClient={editedClient}
             setEditedClient={setEditedClient}
