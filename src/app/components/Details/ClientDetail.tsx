@@ -88,7 +88,6 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
             <p>
               <strong>Cliente creado por:</strong> {actualClient.createdBy}
             </p>
-            {/* Botón para editar */}
             <button
               onClick={() => {
                 setIsEditing(true);
