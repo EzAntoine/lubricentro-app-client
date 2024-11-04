@@ -192,6 +192,7 @@ const OrdersComponent = () => {
         <OrderDetail
           order={selectedOrder}
           onClose={() => setSelectedOrder(null)}
+          fetchOrders={fetchOrders}
         />
       )}
     </>
