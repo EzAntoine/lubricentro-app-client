@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
+const CreateVehicleOnClientForm = ({
+  isOpen,
+  setIsOpen,
+  onClose,
+  addVehicle,
+}) => {
   const [vehicle, setVehicle] = useState({
     plate: "",
     brand: "",
@@ -14,8 +19,7 @@ const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
     setVehicle({ ...vehicle, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     addVehicle(vehicle);
     onClose(); // Cierra el popup después de agregar el vehículo
     setVehicle({
@@ -26,6 +30,22 @@ const CreateVehicleOnClientForm = ({ isOpen, onClose, addVehicle }) => {
       details: "",
     });
   };
+
+  useEffect(() => {
+    const onEscClose = (e) => {
+      if (e.key === "Escape") {
+        if (isOpen) {
+          setIsOpen(false);
+        }
+      } else if (e.key === "Enter") {
+        handleSubmit();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("keydown", onEscClose);
+    }
+    return () => document.removeEventListener("keydown", onEscClose);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
