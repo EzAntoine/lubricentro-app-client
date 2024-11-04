@@ -1,4 +1,4 @@
-import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { EyeIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import CreateClientForm from "../Forms/CreateClientForm";
 import { URL } from "../../../../config/consts";
@@ -44,7 +44,7 @@ const ClientsComponent = () => {
 
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [formOpen]);
 
   const clickHandler = (e) => {
     setFormOpen(true);
@@ -135,9 +135,6 @@ const ClientsComponent = () => {
                         >
                           <EyeIcon className="w-5 h-5" />
                         </button>
-                        <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
-                          <PencilSquareIcon className="w-5 h-5" />
-                        </button>
                       </td>
                     </tr>
                   ))}
@@ -150,7 +147,11 @@ const ClientsComponent = () => {
       {selectedClient && (
         <ClientDetail
           client={selectedClient}
-          onClose={() => setSelectedClient(null)}
+          onClose={() => {
+            setSelectedClient(null);
+            fetchClients();
+          }}
+          fetchClients={fetchClients}
         />
       )}
     </>

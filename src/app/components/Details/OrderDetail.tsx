@@ -1,7 +1,16 @@
-import { XMarkIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
-import { useEffect } from "react";
+import {
+  XMarkIcon,
+  ChatBubbleOvalLeftIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import EditOrderForm from "../Forms/EditOrderForm";
 
-const OrderDetail = ({ order, onClose }) => {
+const OrderDetail = ({ order, onClose, fetchOrders }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedOrder, setEditedOrder] = useState(order);
+  const [actualOrder, setActualOrder] = useState(order);
+
   const onEscClose = (e) => {
     if (e.key === "Escape") {
       onClose();
@@ -20,52 +29,75 @@ const OrderDetail = ({ order, onClose }) => {
         <button onClick={onClose}>
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
         </button>
-        <h2 className="text-xl font-bold -mt-4 mb-4">
-          Orden de trabajo Nº XXXX {/* order.counter */}
-        </h2>
-        <p>
-          <strong>Fecha de ingreso:</strong>{" "}
-          {new Date(order.date).toLocaleDateString()}
-        </p>
-        <p>
-          <strong>Cliente:</strong> {order.clientName}
-        </p>
-        <p className="flex items-center">
-          <strong>Telefono:</strong> {order.clientPhone}
-          <button
-            onClick={() =>
-              window.open(`https://wa.me/${order.clientPhone}`, "_blank")
-            }
-            className="mb-1 ml-2 h-5 w-5"
-          >
-            <ChatBubbleOvalLeftIcon />
-          </button>
-        </p>
-        <p>
-          <strong>Patente:</strong> {order.vehiclePlate}
-        </p>
-        <p>
-          <strong>Marca y modelo:</strong>{" "}
-          {/* order.vehicle.modelAndBrand */ "Marca y modelo"}
-        </p>
-        <p>
-          <strong>Falla:</strong> {order.failure}
-        </p>
-        <p>
-          <strong>Solucion estimada:</strong> {order.estimateSolution}
-        </p>
-        <p>
-          <strong>Presupuesto:</strong> ${order.price}
-        </p>
-        <p>
-          <strong>Estado:</strong> {order.status}
-        </p>
-        <p>
-          <strong>Observaciones:</strong> {order.observations}
-        </p>
-        <p>
-          <strong>Orden creada por:</strong> {order.createdBy}
-        </p>
+        <h2 className="text-xl font-bold -mt-4 mb-4">Orden de trabajo</h2>
+
+        {isEditing ? (
+          <EditOrderForm
+            setIsEditing={setIsEditing}
+            editedOrder={editedOrder}
+            setEditedOrder={setEditedOrder}
+            setActualOrder={setActualOrder}
+            fetchOrders={fetchOrders}
+          />
+        ) : (
+          <>
+            <p>
+              <strong>Fecha de ingreso:</strong>{" "}
+              {new Date(actualOrder.date).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>Cliente:</strong> {actualOrder.clientName}
+            </p>
+            <p className="flex items-center">
+              <strong>Telefono:</strong> {actualOrder.clientPhone}
+              <button
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/${actualOrder.clientPhone}`,
+                    "_blank"
+                  )
+                }
+                className="mb-1 ml-2 h-5 w-5"
+              >
+                <ChatBubbleOvalLeftIcon />
+              </button>
+            </p>
+            <p>
+              <strong>Patente:</strong> {actualOrder.vehiclePlate}
+            </p>
+            <p>
+              <strong>Marca y modelo:</strong>{" "}
+              {/* actualOrder.vehicle.modelAndBrand */ "Marca y modelo"}
+            </p>
+            <p>
+              <strong>Falla:</strong> {actualOrder.failure}
+            </p>
+            <p>
+              <strong>Solucion estimada:</strong> {actualOrder.estimateSolution}
+            </p>
+            <p>
+              <strong>Presupuesto:</strong> ${actualOrder.price}
+            </p>
+            <p>
+              <strong>Observaciones:</strong> {actualOrder.observations}
+            </p>
+            <p>
+              <strong>Estado:</strong> {actualOrder.status}
+            </p>
+            <p>
+              <strong>Orden creada por:</strong> {actualOrder.createdBy}
+            </p>
+            <button
+              onClick={() => {
+                setIsEditing(true);
+              }}
+              className="flex mt-2 p-2 text-sm font-medium rounded bg-green-600 text-white hover:bg-[#1a7742] hover:text-white"
+            >
+              Editar
+              <PencilSquareIcon className="ml-1 w-5 h-5" />
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
