@@ -132,7 +132,7 @@ const OrdersComponent = () => {
                         {new Date(item.date).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.clientName} {/* Buscar nombre de cliente. */}
+                        {item.clientName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.vehiclePlate}

@@ -94,36 +94,6 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
     setFormOpen(false);
   };
 
-  /* const fetchAndFilterVehicles = async () => {
-    try {
-      const response = await fetch(`${URL}/vehicles`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los vehículos.");
-      }
-
-      const vehicles = await response.json();
-      clientVehicles = vehicles.data.filter((veh) => {
-        vehicles.data.some(
-          (clientVeh) =>
-            clientVeh.plate.toUpperCase() === veh.plate.toUpperCase()
-        );
-      });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }; 
-
-  useEffect(() => {
-    fetchAndFilterVehicles();
-  }, [clientVehicles]);
-*/
   useEffect(() => {
     const onEscClose = (e) => {
       if (e.key === "Escape") {
