@@ -32,6 +32,8 @@ interface Order {
   observations: string;
 }
 export default function CreateClientForm({ setFormOpen, fetchClients }) {
+  let clientVehicles: Vehicle[] = [];
+
   const [newClient, setNewClient] = useState<Client>({
     name: "",
     surname: "",
@@ -110,6 +112,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
       ...prev,
       vehicles: [...prev.vehicles, vehicle],
     }));
+    clientVehicles.push(vehicle);
   };
 
   return (
@@ -173,22 +176,6 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
                 value={newClient.dni}
               />
             </div>
-            <div className="mb-4">
-              <label
-                htmlFor="detail"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Detalles:
-              </label>
-              <input
-                type="detail"
-                id="detail"
-                name="detail"
-                className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                onChange={inputHandler}
-                value={newClient.detail}
-              />
-            </div>
           </div>
           <div>
             <div className="mb-2">
@@ -232,7 +219,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
                 <select
                   className="mt-1 w-9/10 p-2 border text-black border-gray-300 rounded-md"
                   defaultValue=""
-                  disabled={!newClient.vehicles.length} // Deshabilitar si no hay vehículos
+                  disabled={!newClient.vehicles?.length} // Deshabilitar si no hay vehículos
                 >
                   <option value="" disabled>
                     Vehículos
@@ -253,19 +240,30 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="col-span-2 mb-4">
+            <label
+              htmlFor="detail"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Detalles:
+            </label>
+            <textarea
+              name="detail"
+              className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              onChange={inputHandler}
+              value={newClient.detail}
+            />
+          </div>
+          <div className="col-span-2 flex justify-between">
             <button
-              type="button"
-              className="w-full m-2 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 transition duration-200"
               onClick={cancelHandler}
+              className="mr-2 bg-red-800 hover:bg-[#72241d] text-white px-4 py-2 rounded"
             >
               Cancelar
             </button>
-          </div>
-          <div className="flex">
             <button
               type="submit"
-              className="w-full m-2 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+              className="bg-green-600 hover:bg-[#1a7742] text-white px-4 py-2 rounded"
             >
               Crear cliente
             </button>
@@ -273,9 +271,8 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
         </form>
       </div>
       <CreateVehicleOnClientForm
-        isOpen={isPopupOpen}
-        setIsOpen={setIsPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
+        isPopupOpen={isPopupOpen}
+        setIsPopupOpen={setIsPopupOpen}
         addVehicle={addVehicle}
       />
     </div>

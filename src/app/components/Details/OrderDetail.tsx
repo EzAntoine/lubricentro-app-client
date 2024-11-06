@@ -5,11 +5,44 @@ import {
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import EditOrderForm from "../Forms/EditOrderForm";
+import { URL } from "../../../../config/consts";
 
 const OrderDetail = ({ order, onClose, fetchOrders }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedOrder, setEditedOrder] = useState(order);
   const [actualOrder, setActualOrder] = useState(order);
+  const [actualVehicle, setActualVehicle] = useState({
+    plate: "",
+    brand: "",
+    modelo: "",
+    engine: "",
+    kilometers: "",
+    year: "",
+    details: "",
+  });
+
+  const fetchVehicle = async () => {
+    await fetch(`${URL}/vehicles/plate/${actualOrder.vehiclePlate}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(
+            "Error al obtener vehículo con dominio: " + actualOrder.vehiclePlate
+          );
+        }
+        const data = await res.json();
+        setActualVehicle(data.data);
+      })
+      .catch((error) => {
+        console.log("Error al obtener vehiculo de orden: " + error.message);
+      });
+  };
+  fetchVehicle();
 
   useEffect(() => {
     const onEscClose = (e) => {
@@ -72,7 +105,7 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
             </p>
             <p>
               <strong>Marca y modelo:</strong>{" "}
-              {/* actualOrder.vehicle.modelAndBrand */ "Marca y modelo"}
+              {actualVehicle.brand + " " + actualVehicle.modelo}
             </p>
             <p>
               <strong>Falla:</strong> {actualOrder.failure}
