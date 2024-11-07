@@ -8,7 +8,7 @@ interface Client {
   phone: string;
   email: string;
   detail: string;
-  vehicles: Vehicle[][];
+  vehicles: string[];
 }
 
 interface Vehicle {

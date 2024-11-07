@@ -9,7 +9,7 @@ interface Client {
   phone: string;
   email: string;
   detail: string;
-  vehicles: Vehicle[];
+  vehicles: string[];
   createdBy: string | null;
 }
 interface Vehicle {
@@ -33,7 +33,7 @@ interface Order {
   observations: string;
 }
 export default function CreateClientForm({ setFormOpen, fetchClients }) {
-  const clientVehicles: Vehicle[] = [];
+  const clientVehicles: string[] = [];
 
   const [newClient, setNewClient] = useState<Client>({
     name: "",
@@ -111,7 +111,7 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
   const addVehicle = (vehicle: Vehicle) => {
     setNewClient((prev) => ({
       ...prev,
-      vehicles: [...prev.vehicles, vehicle.plate],
+      vehicles: [...(prev.vehicles || []), vehicle.plate],
     }));
     clientVehicles.push(vehicle.plate);
   };
@@ -225,9 +225,9 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
                   <option value="" disabled>
                     Vehículos
                   </option>
-                  {newClient.vehicles.map((vehicle, index) => (
-                    <option key={index} value={vehicle.plate}>
-                      {`[${vehicle.plate}] ${vehicle.brand} ${vehicle.modelo} (${vehicle.year})`}
+                  {newClient.vehicles?.map((item) => (
+                    <option key={item} value={item}>
+                      {`[${item}]`}
                     </option>
                   ))}
                 </select>

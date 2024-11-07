@@ -38,7 +38,6 @@ const CreateVehicleOnClientForm = ({
       }
 
       const data = await response.json();
-      console.log(data.data);
       await addVehicle(data.data);
 
       setVehicle({

@@ -67,7 +67,7 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
         <button onClick={onClose}>
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
         </button>
-        <h2 className="text-xl font-bold -mt-4 mb-4">
+        <h2 className="text-xl font-bold -mt-4 mb-4 underline">
           Orden de trabajo Nº {actualOrder.number}
         </h2>
 

@@ -99,7 +99,7 @@ const EditClientForm = ({
     <div>
       <div>
         <label className="block mb-2">
-          Nombre:
+          <strong>Nombre:</strong>
           <input
             type="text"
             name="name"
@@ -109,7 +109,7 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
-          Apellido:
+          <strong>Apellido:</strong>
           <input
             type="text"
             name="surname"
@@ -119,7 +119,7 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
-          DNI:
+          <strong>DNI:</strong>
           <input
             type="text"
             name="dni"
@@ -129,7 +129,7 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
-          Teléfono:
+          <strong>Teléfono:</strong>
           <input
             type="text"
             name="phone"
@@ -139,7 +139,7 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
-          Email:
+          <strong>Email:</strong>
           <input
             type="email"
             name="email"
@@ -149,7 +149,7 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
-          Agregar Vehículo
+          <strong>Agregar Vehículo</strong>
           <button
             type="button"
             onClick={() => setIsPopupOpen(true)}
@@ -159,7 +159,7 @@ const EditClientForm = ({
           </button>
         </label>
         <label className="block mb-2">
-          Detalle:
+          <strong>Detalle:</strong>
           <textarea
             name="detail"
             value={editedClient.detail}
