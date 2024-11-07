@@ -21,28 +21,31 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
     details: "",
   });
 
-  const fetchVehicle = async () => {
-    await fetch(`${URL}/vehicles/plate/${actualOrder.vehiclePlate}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(
-            "Error al obtener vehículo con dominio: " + actualOrder.vehiclePlate
-          );
-        }
-        const data = await res.json();
-        setActualVehicle(data.data);
+  useEffect(() => {
+    const fetchVehicle = async () => {
+      await fetch(`${URL}/vehicles/plate/${actualOrder.vehiclePlate}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
       })
-      .catch((error) => {
-        console.log("Error al obtener vehiculo de orden: " + error.message);
-      });
-  };
-  fetchVehicle();
+        .then(async (res) => {
+          if (!res.ok) {
+            throw new Error(
+              "Error al obtener vehículo con dominio: " +
+                actualOrder.vehiclePlate
+            );
+          }
+          const data = await res.json();
+          setActualVehicle(data.data);
+        })
+        .catch((error) => {
+          console.log("Error al obtener vehiculo de orden: " + error.message);
+        });
+    };
+    fetchVehicle();
+  }, [actualOrder.vehiclePlate]);
 
   useEffect(() => {
     const onEscClose = (e) => {
@@ -74,8 +77,10 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
             setIsEditing={setIsEditing}
             editedOrder={editedOrder}
             setEditedOrder={setEditedOrder}
+            actualOrder={actualOrder}
             setActualOrder={setActualOrder}
             fetchOrders={fetchOrders}
+            actualVehicle={actualVehicle}
           />
         ) : (
           <>

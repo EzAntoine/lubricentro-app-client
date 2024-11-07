@@ -13,6 +13,7 @@ interface Client {
   createdBy: string | null;
 }
 interface Vehicle {
+  _id: string;
   plate: string;
   ownerId: string;
   brand: string;
@@ -32,7 +33,7 @@ interface Order {
   observations: string;
 }
 export default function CreateClientForm({ setFormOpen, fetchClients }) {
-  let clientVehicles: Vehicle[] = [];
+  const clientVehicles: Vehicle[] = [];
 
   const [newClient, setNewClient] = useState<Client>({
     name: "",
@@ -110,9 +111,9 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
   const addVehicle = (vehicle: Vehicle) => {
     setNewClient((prev) => ({
       ...prev,
-      vehicles: [...prev.vehicles, vehicle],
+      vehicles: [...prev.vehicles, vehicle.plate],
     }));
-    clientVehicles.push(vehicle);
+    clientVehicles.push(vehicle.plate);
   };
 
   return (

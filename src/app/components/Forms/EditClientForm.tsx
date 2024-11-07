@@ -1,6 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { URL } from "../../../../config/consts";
+import CreateVehicleOnClientForm from "./CreateVehicleOnClientForm";
 
+interface Vehicle {
+  _id: string;
+  plate: string;
+  ownerId: string;
+  brand: string;
+  modelo: string;
+  year: string;
+  details: string;
+  orders: Order[];
+}
+interface Order {
+  date: Date;
+  vehiclePlate: string;
+  clientId: string;
+  failure: string;
+  estimateSolution: string;
+  price: number;
+  status: string;
+  observations: string;
+}
 const EditClientForm = ({
   isEditing,
   setIsEditing,
@@ -9,26 +30,34 @@ const EditClientForm = ({
   setActualClient,
   fetchClients,
 }) => {
+  const clientVehicles: string[] = [];
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditedClient({ ...editedClient, [name]: value });
   };
 
   const handleSave = async () => {
+    const updatedClient = {
+      ...editedClient,
+      vehicles: [...(editedClient.vehicles || []), ...clientVehicles],
+    };
+
     await fetch(`${URL}/clients/${editedClient._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
-      body: JSON.stringify(editedClient),
+      body: JSON.stringify(updatedClient),
     })
       .then((res) => {
         if (!res.ok) {
           throw new Error("Error al modificar cliente");
         }
         fetchClients();
-        setActualClient(editedClient);
+        setActualClient(updatedClient);
         swal("Cliente modificado correctamente!", "", "success");
       })
       .catch((error) => {
@@ -42,20 +71,29 @@ const EditClientForm = ({
   };
 
   useEffect(() => {
-    const onEscClose = (e) => {
+    const onKeyDown = (e) => {
       if (e.key === "Escape") {
         if (isEditing) {
           setIsEditing(false);
         }
-      } else if (e.key === "Enter") {
+      } else if (e.key === "Enter" || e.keyCode === 13 || e.keyCode === 108) {
+        e.preventDefault();
         handleSave();
       }
     };
     if (isEditing) {
-      document.addEventListener("keydown", onEscClose);
+      document.addEventListener("keydown", onKeyDown);
     }
-    return () => document.removeEventListener("keydown", onEscClose);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [isEditing]);
+
+  const addVehicle = (vehicle: Vehicle) => {
+    setEditedClient((prev) => ({
+      ...prev,
+      vehicles: [...(prev.vehicles || []), vehicle.plate],
+    }));
+    clientVehicles.push(vehicle.plate);
+  };
 
   return (
     <div>
@@ -111,6 +149,16 @@ const EditClientForm = ({
           />
         </label>
         <label className="block mb-2">
+          Agregar Vehículo
+          <button
+            type="button"
+            onClick={() => setIsPopupOpen(true)}
+            className="m-2 px-2 bg-green-600 rounded-full text-white text-2xl font-bold"
+          >
+            +
+          </button>
+        </label>
+        <label className="block mb-2">
           Detalle:
           <textarea
             name="detail"
@@ -134,6 +182,11 @@ const EditClientForm = ({
           Confirmar
         </button>
       </div>
+      <CreateVehicleOnClientForm
+        isPopupOpen={isPopupOpen}
+        setIsPopupOpen={setIsPopupOpen}
+        addVehicle={addVehicle}
+      />
     </div>
   );
 };

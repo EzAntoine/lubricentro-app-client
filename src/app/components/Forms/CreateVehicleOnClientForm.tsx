@@ -21,20 +21,6 @@ const CreateVehicleOnClientForm = ({
     setVehicle({ ...vehicle, [name]: value });
   };
 
-  /* const handleSubmit = () => {
-    addVehicle(vehicle);
-    onClose();
-    setVehicle({
-      plate: "",
-      brand: "",
-      modelo: "",
-      engine: "",
-      kilometers: "",
-      year: "",
-      details: "",
-    });
-  }; */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -52,6 +38,7 @@ const CreateVehicleOnClientForm = ({
       }
 
       const data = await response.json();
+      console.log(data.data);
       await addVehicle(data.data);
 
       setVehicle({
@@ -81,7 +68,7 @@ const CreateVehicleOnClientForm = ({
           setIsPopupOpen(false);
         }
       } else if (e.key === "Enter") {
-        handleSubmit();
+        handleSubmit(e);
       }
     };
     if (isPopupOpen) {
@@ -93,9 +80,9 @@ const CreateVehicleOnClientForm = ({
   if (!isPopupOpen) return null;
 
   return (
-    <div className="mt-14 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-96">
-        <h2 className="flex items-center justify-center text-lg font-bold mb-4">
+    <div className="mt-14 fixed inset-0 flex items-center justify-center">
+      <div className="bg-[#2d2c2d] bg-opacity-100 p-6 rounded-lg shadow-md w-200">
+        <h2 className="flex items-center justify-center text-lg font-bold mb-4 text-gray-200">
           Agregar Vehículo
         </h2>
         <form onSubmit={handleSubmit}>
@@ -168,7 +155,7 @@ const CreateVehicleOnClientForm = ({
               </div>
               <div className="mb-2">
                 <label
-                  htmlFor="model"
+                  htmlFor="modelo"
                   className="block text-sm font-medium text-gray-300"
                 >
                   Modelo:
@@ -213,20 +200,6 @@ const CreateVehicleOnClientForm = ({
               />
             </div>
           </div>
-          {/* <div className="flex justify-between -mb-4">
-            <button
-              onClick={onClose}
-              className="w-full m-2 py-2 px-4 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 transition duration-200"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="w-full m-2 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
-            >
-              Agregar
-            </button>
-          </div> */}
           <div className="flex justify-between mt-4">
             <button
               onClick={() => setIsPopupOpen(false)}

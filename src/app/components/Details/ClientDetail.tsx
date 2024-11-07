@@ -11,16 +11,28 @@ const ClientDetail = ({ client, onClose, fetchClients }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [actualClient, setActualClient] = useState(client);
   const [editedClient, setEditedClient] = useState(client);
+  const [vehiclesList, setVehiclesList] = useState("");
 
-  const vehiclesList =
-    client.vehicles.length > 0
-      ? client.vehicles[0]
-          .map(
-            (vehicle) =>
-              `[${vehicle.plate}] ${vehicle.brand} ${vehicle.modelo} (${vehicle.year})`
-          )
-          .join(" -- ")
+  useEffect(() => {
+    setActualClient(client);
+    setEditedClient(client);
+  }, [client]);
+
+  const formatVehiclesList = (vehicles) => {
+    return vehicles?.length > 0
+      ? vehicles.map((veh) => `[${veh}]`).join(" - ")
       : "No hay vehículos asignados.";
+  };
+
+  useEffect(() => {
+    setVehiclesList(formatVehiclesList(editedClient.vehicles));
+  }, [editedClient]);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setVehiclesList(formatVehiclesList(editedClient.vehicles));
+    }
+  }, [isEditing, editedClient]);
 
   useEffect(() => {
     const onEscClose = (e) => {

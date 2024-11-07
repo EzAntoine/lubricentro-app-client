@@ -281,9 +281,9 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                         El cliente no tiene vehículos agregados.
                       </option>
                     ) : (
-                      selectedClient.vehicles[0]?.map((item) => (
-                        <option key={item.plate} value={item.plate}>
-                          {item.plate}
+                      selectedClient.vehicles?.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
                         </option>
                       ))
                     )
