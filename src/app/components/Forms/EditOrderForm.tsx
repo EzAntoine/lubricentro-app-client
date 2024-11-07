@@ -6,8 +6,10 @@ const EditOrderForm = ({
   setIsEditing,
   editedOrder,
   setEditedOrder,
+  actualOrder,
   setActualOrder,
   fetchOrders,
+  actualVehicle,
 }) => {
   const handleEditChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +49,7 @@ const EditOrderForm = ({
         if (isEditing) {
           setIsEditing(false);
         }
-      } else if (e.key === "Enter") {
+      } else if (e.key === "Enter" || e.keyCode === 13 || e.keyCode === 108) {
         handleSave();
       }
     };
@@ -62,29 +64,27 @@ const EditOrderForm = ({
       <div className="grid grid-cols-2 w-full">
         <label className="block mb-2">
           <strong>Fecha de ingreso: </strong>
-          {new Date(editedOrder.date).toLocaleDateString()}
+          {new Date(actualOrder.date).toLocaleDateString()}
         </label>
         <label className="block mb-2">
           <strong>Cliente: </strong>
-          {editedOrder.clientName}
+          {actualOrder.clientName}
         </label>
         <label className="block mb-2">
           <strong>Patente: </strong>
-          {editedOrder.vehiclePlate}
+          {actualOrder.vehiclePlate}
         </label>
         <label className="block mb-2">
           <strong>Marca y modelo: </strong>
-          {editedOrder.brand + " " + editedOrder.modelo}
+          {actualVehicle.brand +
+            " " +
+            actualVehicle.modelo +
+            " " +
+            actualVehicle.year}
         </label>
         <label className="block mb-2 mr-2">
           <strong>Teléfono: </strong>
-          <input
-            type="text"
-            name="phone"
-            value={editedOrder.clientPhone}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
+          <p>+54 - {editedOrder.clientPhone}</p>
         </label>
         <label className="block mb-2">
           <strong>Presupuesto: </strong>
@@ -116,7 +116,7 @@ const EditOrderForm = ({
         </label>
         <label className="block mb-2">
           <strong>Estado: </strong>
-          {editedOrder.status}
+          {actualOrder.status}
         </label>
         <label className="block mb-2">
           <strong>Observaciones: </strong>
@@ -129,7 +129,7 @@ const EditOrderForm = ({
         </label>
         <label className="block mb-2">
           <strong>Orden creada por: </strong>
-          {editedOrder.createdBy}
+          {actualOrder.createdBy}
         </label>
       </div>
       <div className="flex justify-between mt-4">

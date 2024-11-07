@@ -135,7 +135,7 @@ const OrdersComponent = () => {
                         {item.clientName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.vehiclePlate}
+                        {`[ ${item.vehiclePlate} ]`}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.failure}

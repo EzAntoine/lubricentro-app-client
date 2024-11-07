@@ -8,7 +8,7 @@ interface Client {
   phone: string;
   email: string;
   detail: string;
-  vehicles: Vehicle[][];
+  vehicles: string[];
 }
 
 interface Vehicle {
@@ -206,6 +206,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                 <select
                   className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
                   onChange={clientSelectHandler}
+                  required
                 >
                   <option value="">Seleccionar cliente</option>
                   {clients.length === 0 ? (
@@ -273,6 +274,7 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                 <select
                   className="w-full mt-1 py-2 px-3 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
                   onChange={plateSelectHandler}
+                  required
                 >
                   <option value="">Seleccionar vehículo</option>
                   {selectedClient ? (
@@ -281,9 +283,9 @@ export default function CreateOrderForm({ setFormOpen, fetchOrders }) {
                         El cliente no tiene vehículos agregados.
                       </option>
                     ) : (
-                      selectedClient.vehicles[0]?.map((item) => (
-                        <option key={item.plate} value={item.plate}>
-                          {item.plate}
+                      selectedClient.vehicles?.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
                         </option>
                       ))
                     )
