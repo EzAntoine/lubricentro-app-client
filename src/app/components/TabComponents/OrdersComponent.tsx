@@ -7,8 +7,10 @@ import search from "../resources/SearchFunctions";
 import StatusFilterButton from "../Buttons/StatusFilterButton";
 import OrderDetail from "../Details/OrderDetail";
 import SendOrderButton from "../Buttons/SendOrderButton";
+import StatusSelect from "../Forms/StatusSelect";
 interface Order {
   _id: string;
+  number: number;
   date: Date;
   clientId: string;
   clientName: string;
@@ -55,11 +57,6 @@ const OrdersComponent = () => {
     setFormOpen(true);
   };
 
-  const handleStatusChange = (e) => {
-    console.log("Nuevo status: " + e.target.value);
-    //Aca hacer un Post con el nuevo status para editar.
-  };
-
   const onSearch = (searchText: string) => {
     search(searchText, orders, setOrdersFiltered);
   };
@@ -86,7 +83,7 @@ const OrdersComponent = () => {
             <h1 className="text-xl font-bold p-2">Órdenes</h1>
             <button
               onClick={clickHandler}
-              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
+              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] border border-gray-300 shadow-sm rounded hover:bg-[#72241d]"
             >
               Nueva Orden
             </button>
@@ -107,6 +104,9 @@ const OrdersComponent = () => {
               <table className="w-full h-full divide-y divide-gray-200 bg-[#2d2c2d] bg-opacity-80">
                 <thead>
                   <tr>
+                    <th className="px-3 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                      Nº
+                    </th>
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
                       Fecha
                     </th>
@@ -128,6 +128,9 @@ const OrdersComponent = () => {
                 <tbody className="divide-y divide-gray-200 min-h-screen">
                   {ordersFiltered.map((item) => (
                     <tr key={item._id}>
+                      <td className="px-3 py-4 whitespace-nowrap">
+                        {item.number}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {new Date(item.date).toLocaleDateString()}
                       </td>
@@ -145,40 +148,13 @@ const OrdersComponent = () => {
                       </td>
                       <td className="flex justify-end mx-auto mr-4">
                         <button
-                          className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
+                          className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 border border-gray-300 shadow-sm text-black hover:bg-[#1a7742] hover:text-white"
                           onClick={() => setSelectedOrder(item)}
                         >
                           <EyeIcon className="w-5 h-5" />
                         </button>
                         <SendOrderButton order={item} />
-                        <select
-                          id="status"
-                          name="status"
-                          value={item.status}
-                          onChange={handleStatusChange}
-                          className="mt-2 px-1 py-1 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
-                        >
-                          {
-                            <option key={item.status} value={item.status}>
-                              {item.status}
-                            </option>
-                          }
-                          {item.status !== "Pendiente" && (
-                            <option value="Pendiente">Pendiente</option>
-                          )}
-                          {item.status !== "Realizado" && (
-                            <option value="Realizado">Realizado</option>
-                          )}
-                          {item.status !== "Retirado" && (
-                            <option value="Retirado">Retirado</option>
-                          )}
-                          {item.status !== "Demorado" && (
-                            <option value="Demorado">Demorado</option>
-                          )}
-                        </select>
-                        {/* <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
-                          <PencilSquareIcon className="w-5 h-5" />
-                        </button> */}
+                        <StatusSelect order={item} />
                       </td>
                     </tr>
                   ))}

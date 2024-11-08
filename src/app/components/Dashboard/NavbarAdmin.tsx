@@ -14,8 +14,7 @@ export default function NavbarAdmin({ logout }) {
         <Image src={LogoNav} alt="Lubricentro Maceratesi" priority />
         <div className="flex flex-wrap">
           <DropdownMenu />
-          {/* La siguiente imagen sera reemplazada por una generica o en si se implementa login google con la foto respectiva. */}
-          <button className="ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#b93c30] hover:text-white">
+          <button className="ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black border border-gray-300 shadow-sm hover:bg-[#b93c30] hover:text-white">
             <PowerIcon className="w-6 h-6" onClick={logoutHandler} />
           </button>
         </div>

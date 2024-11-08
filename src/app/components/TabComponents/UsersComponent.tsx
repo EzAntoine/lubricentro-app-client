@@ -50,7 +50,7 @@ const UsersComponent = () => {
             <h1 className="text-xl font-bold p-2">Usuarios</h1>
             <button
               onClick={clickHandler}
-              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
+              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] border border-gray-300 shadow-sm rounded hover:bg-[#72241d]"
             >
               Nuevo Usuario
             </button>
@@ -78,12 +78,12 @@ const UsersComponent = () => {
                         {item.username}
                       </td>
                       <td className="flex justify-end mx-auto mr-4">
-                        <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
+                        {/*  <button className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white">
                           <PencilSquareIcon className="w-5 h-5" />
                         </button>
                         <button className="mt-2 ml-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#72241d] hover:text-white">
                           <TrashIcon className="w-5 h-5" />
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))}
