@@ -2,8 +2,6 @@ import {
   DevicePhoneMobileIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
-import walogo from "../../../../public/svg/whatsapp-color.svg";
-import Image from "next/image";
 
 const SendOrderButton = ({ order }) => {
   const clickHandler = (e) => {
@@ -28,16 +26,11 @@ const SendOrderButton = ({ order }) => {
   return (
     <button
       onClick={clickHandler}
-      className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm mt-2 mx-2 px-1 py-1 bg-[#1a7742] text-white text-sm font-medium hover:bg-[#15793a] transition duration-200"
+      className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm mt-2 mx-2 px-1 py-1 bg-gray-50 text-black text-sm font-medium hover:bg-[#15793a] hover:text-white"
     >
       Enviar
       <ArrowRightIcon className="ml-2 w-5 h-5" />
       <DevicePhoneMobileIcon className="w-5 h-5" />
-      {/* <Image
-        src={walogo}
-        alt="Enviar orden por Whatsapp"
-        className="ml-2 w-5 h-5"
-      /> */}
     </button>
   );
 };

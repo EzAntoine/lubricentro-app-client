@@ -50,7 +50,7 @@ const UsersComponent = () => {
             <h1 className="text-xl font-bold p-2">Usuarios</h1>
             <button
               onClick={clickHandler}
-              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
+              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] border border-gray-300 shadow-sm rounded hover:bg-[#72241d]"
             >
               Nuevo Usuario
             </button>

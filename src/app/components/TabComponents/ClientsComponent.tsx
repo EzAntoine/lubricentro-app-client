@@ -78,7 +78,7 @@ const ClientsComponent = () => {
             <h1 className="text-xl font-bold p-2">Clientes</h1>
             <button
               onClick={clickHandler}
-              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] rounded hover:bg-[#72241d]"
+              className="px-4 py-1.5 text-sm font-medium text-white bg-[#1a7742] border border-gray-300 shadow-sm rounded hover:bg-[#72241d]"
             >
               Nuevo Cliente
             </button>
@@ -130,7 +130,7 @@ const ClientsComponent = () => {
                       </td>
                       <td className="flex justify-end mx-auto mr-4">
                         <button
-                          className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black hover:bg-[#1a7742] hover:text-white"
+                          className="mt-2 p-2 text-sm font-medium rounded bg-gray-50 text-black border border-gray-300 shadow-sm hover:bg-[#1a7742] hover:text-white"
                           onClick={() => setSelectedClient(item)}
                         >
                           <EyeIcon className="w-5 h-5" />
