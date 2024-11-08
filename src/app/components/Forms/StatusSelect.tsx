@@ -62,7 +62,17 @@ const StatusSelect = ({ order }) => {
       name="status"
       value={status}
       onChange={handleStatusChange}
-      className="mt-2 px-1 py-1 text-sm font-medium text-black bg-gray-50 border border-gray-300 rounded"
+      className="mt-2 px-1 py-1 text-sm font-semibold text-black bg-gray-50 border border-gray-300 rounded"
+      style={{
+        background:
+          status === "Pendiente"
+            ? "yellow"
+            : status === "Realizado"
+            ? "green"
+            : status === "Demorado"
+            ? "red"
+            : "grey",
+      }}
     >
       <option key={status} value={status}>
         {status}
