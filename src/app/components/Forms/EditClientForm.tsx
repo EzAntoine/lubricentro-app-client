@@ -97,43 +97,13 @@ const EditClientForm = ({
 
   return (
     <div>
-      <div>
-        <label className="block mb-2">
+      <div className="grid grid-cols-2 w-full">
+        <label className="block mb-2 mr-2">
           <strong>Nombre:</strong>
           <input
             type="text"
             name="name"
             value={editedClient.name}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>Apellido:</strong>
-          <input
-            type="text"
-            name="surname"
-            value={editedClient.surname}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>DNI:</strong>
-          <input
-            type="text"
-            name="dni"
-            value={editedClient.dni}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>Teléfono:</strong>
-          <input
-            type="text"
-            name="phone"
-            value={editedClient.phone}
             onChange={handleEditChange}
             className="border p-1 rounded w-full"
           />
@@ -148,7 +118,38 @@ const EditClientForm = ({
             className="border p-1 rounded w-full"
           />
         </label>
+        <label className="block mb-2 mr-2">
+          <strong>Apellido:</strong>
+          <input
+            type="text"
+            name="surname"
+            value={editedClient.surname}
+            onChange={handleEditChange}
+            className="border p-1 rounded w-full"
+          />
+        </label>
         <label className="block mb-2">
+          <strong>Teléfono:</strong>
+          <input
+            type="text"
+            name="phone"
+            value={editedClient.phone}
+            onChange={handleEditChange}
+            className="border p-1 rounded w-full"
+          />
+        </label>
+        <label className="block mb-2 mr-2">
+          <strong>DNI:</strong>
+          <input
+            type="text"
+            name="dni"
+            value={editedClient.dni}
+            onChange={handleEditChange}
+            className="border p-1 rounded w-full"
+          />
+        </label>
+
+        <label className="block mb-2 mt-3 mr-4">
           <strong>Agregar Vehículo</strong>
           <button
             type="button"
@@ -158,16 +159,16 @@ const EditClientForm = ({
             +
           </button>
         </label>
-        <label className="block mb-2">
-          <strong>Detalle:</strong>
-          <textarea
-            name="detail"
-            value={editedClient.detail}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
       </div>
+      <label className="block mb-2">
+        <strong>Detalle:</strong>
+        <textarea
+          name="detail"
+          value={editedClient.detail}
+          onChange={handleEditChange}
+          className="border p-1 rounded w-full"
+        />
+      </label>
       <div className="flex justify-between mt-4">
         <button
           onClick={() => setIsEditing(false)}

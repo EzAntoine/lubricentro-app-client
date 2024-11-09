@@ -67,8 +67,16 @@ const EditOrderForm = ({
           {new Date(actualOrder.date).toLocaleDateString()}
         </label>
         <label className="block mb-2">
+          <strong>Estado: </strong>
+          {actualOrder.status}
+        </label>
+        <label className="block mb-2">
           <strong>Cliente: </strong>
           {actualOrder.clientName}
+        </label>
+        <label className="flex mb-2">
+          <strong>Teléfono: </strong>
+          <p className="ml-2">{editedOrder.clientPhone}</p>
         </label>
         <label className="block mb-2">
           <strong>Patente: </strong>
@@ -82,56 +90,44 @@ const EditOrderForm = ({
             " " +
             actualVehicle.year}
         </label>
-        <label className="block mb-2 mr-2">
-          <strong>Teléfono: </strong>
-          <p>+54 - {editedOrder.clientPhone}</p>
-        </label>
-        <label className="block mb-2">
-          <strong>Presupuesto: </strong>
-          <input
-            type="number"
-            name="price"
-            value={editedOrder.price}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2 mr-2">
-          <strong>Solución estimada: </strong>
-          <textarea
-            name="estimateSolution"
-            value={editedOrder.estimateSolution}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>Falla:</strong>
-          <textarea
-            name="failure"
-            value={editedOrder.failure}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>Estado: </strong>
-          {actualOrder.status}
-        </label>
-        <label className="block mb-2">
-          <strong>Observaciones: </strong>
-          <textarea
-            name="observations"
-            value={editedOrder.observations}
-            onChange={handleEditChange}
-            className="border p-1 rounded w-full"
-          />
-        </label>
-        <label className="block mb-2">
-          <strong>Orden creada por: </strong>
-          {actualOrder.createdBy}
-        </label>
       </div>
+      <label className="block mb-2">
+        <strong>Falla:</strong>
+        <textarea
+          name="failure"
+          value={editedOrder.failure}
+          onChange={handleEditChange}
+          className="border p-1 rounded w-full h-10"
+        />
+      </label>
+      <label className="block mb-2 mr-2">
+        <strong>Solución estimada: </strong>
+        <textarea
+          name="estimateSolution"
+          value={editedOrder.estimateSolution}
+          onChange={handleEditChange}
+          className="border p-1 rounded w-full h-10"
+        />
+      </label>
+      <label className="block mb-2">
+        <strong>Presupuesto: </strong>
+        <input
+          type="number"
+          name="price"
+          value={editedOrder.price}
+          onChange={handleEditChange}
+          className="border p-1 rounded w-30"
+        />
+      </label>
+      <label className="block mb-2">
+        <strong>Observaciones: </strong>
+        <textarea
+          name="observations"
+          value={editedOrder.observations}
+          onChange={handleEditChange}
+          className="border p-1 rounded w-full h-10"
+        />
+      </label>
       <div className="flex justify-between mt-4">
         <button
           onClick={() => setIsEditing(false)}

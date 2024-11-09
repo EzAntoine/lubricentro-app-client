@@ -9,7 +9,7 @@ const StatusSelect = ({ order }) => {
 
     swal({
       title: "¿Estás seguro?",
-      text: `¿Deseas cambiar el estado a "${newStatus}"?`,
+      text: `¿Deseas cambiar el estado a "${newStatus.toUpperCase()}"?`,
       icon: "warning",
       buttons: {
         cancel: {
