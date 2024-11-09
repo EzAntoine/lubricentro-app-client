@@ -63,7 +63,7 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="bg-gray-200 text-black rounded-lg shadow-lg p-6 relative">
+      <div className="bg-gray-200 text-black rounded-lg p-6 relative">
         <button onClick={onClose}>
           <XMarkIcon className="absolute top-2 right-2 h-6 w-6 text-gray-500 hover:text-gray-800" />
         </button>
