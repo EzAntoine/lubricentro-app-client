@@ -8,7 +8,6 @@ const EditOrderForm = ({
   setEditedOrder,
   actualOrder,
   setActualOrder,
-  fetchOrders,
   actualVehicle,
 }) => {
   const handleEditChange = (e) => {

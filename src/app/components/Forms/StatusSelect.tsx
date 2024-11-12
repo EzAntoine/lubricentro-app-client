@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { URL } from "../../../../config/consts";
 
-const StatusSelect = ({ order }) => {
+const StatusSelect = ({ order, fetchOrders }) => {
   const [status, setStatus] = useState(order.status);
 
   const handleStatusChange = (event) => {
@@ -50,6 +50,7 @@ const StatusSelect = ({ order }) => {
       if (!response.ok) {
         throw new Error("Error al actualizar el estado");
       }
+      fetchOrders();
       swal("Estado actualizado correctamente!", "", "success");
     } catch (error) {
       console.error("Error:", error);
@@ -67,7 +68,7 @@ const StatusSelect = ({ order }) => {
         background:
           status === "Pendiente"
             ? "yellow"
-            : status === "Realizado"
+            : status === "Terminado"
             ? "green"
             : status === "Demorado"
             ? "red"
@@ -78,7 +79,7 @@ const StatusSelect = ({ order }) => {
         {status}
       </option>
       {status !== "Pendiente" && <option value="Pendiente">Pendiente</option>}
-      {status !== "Realizado" && <option value="Realizado">Realizado</option>}
+      {status !== "Terminado" && <option value="Terminado">Terminado</option>}
       {status !== "Retirado" && <option value="Retirado">Retirado</option>}
       {status !== "Demorado" && <option value="Demorado">Demorado</option>}
     </select>
