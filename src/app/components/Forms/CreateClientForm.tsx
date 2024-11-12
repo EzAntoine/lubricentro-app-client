@@ -50,7 +50,17 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    setNewClient({ ...newClient, [name]: value });
+    if (name === "phone") {
+      //Cleans every character wich is not a number.
+      const cleanedValue = value.replace(/[^0-9]/g, "");
+
+      setNewClient((prev) => ({
+        ...prev,
+        phone: cleanedValue,
+      }));
+    } else {
+      setNewClient({ ...newClient, [name]: value });
+    }
   };
 
   const submitHandler = (e) => {
@@ -62,7 +72,10 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
-      body: JSON.stringify(newClient),
+      body: JSON.stringify({
+        ...newClient,
+        phone: `+54${newClient.phone}`,
+      }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -151,15 +164,18 @@ export default function CreateClientForm({ setFormOpen, fetchClients }) {
               >
                 Telefono:
               </label>
-              <input
-                type="phone"
-                id="phone"
-                name="phone"
-                required
-                className="mt-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                onChange={inputHandler}
-                value={newClient.phone}
-              />
+              <div className="flex items-center">
+                <span className="text-gray-300">+54</span>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  className="mt-1 ml-1 block w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                  onChange={inputHandler}
+                  value={newClient.phone}
+                />
+              </div>
             </div>
             <div className="mb-2">
               <label
