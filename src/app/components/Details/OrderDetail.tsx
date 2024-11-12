@@ -3,11 +3,11 @@ import {
   ChatBubbleOvalLeftIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import EditOrderForm from "../Forms/EditOrderForm";
 import { URL } from "../../../../config/consts";
 
-const OrderDetail = ({ order, onClose, fetchOrders }) => {
+const OrderDetail = ({ order, onClose }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedOrder, setEditedOrder] = useState(order);
   const [actualOrder, setActualOrder] = useState(order);
@@ -22,8 +22,36 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
   });
 
   useEffect(() => {
+    const fetchActualOrder = async () => {
+      await fetch(`${URL}/orders/${order._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            throw new Error(
+              `Error al obtener Orden con ID: ${actualOrder._id}`
+            );
+          }
+          const data = await res.json();
+
+          setActualOrder(data.data[0]);
+        })
+        .catch((error) => {
+          console.log(
+            `Error al obtener Orden con ID: ${actualOrder._id} - ${error.message}`
+          );
+        });
+    };
+    fetchActualOrder();
+  }, [actualOrder.status]);
+
+  useEffect(() => {
     const fetchVehicle = async () => {
-      await fetch(`${URL}/vehicles/plate/${actualOrder.vehiclePlate}`, {
+      await fetch(`${URL}/vehicles/plate/${order.vehiclePlate}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +107,6 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
             setEditedOrder={setEditedOrder}
             actualOrder={actualOrder}
             setActualOrder={setActualOrder}
-            fetchOrders={fetchOrders}
             actualVehicle={actualVehicle}
           />
         ) : (
@@ -113,6 +140,12 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
               {actualVehicle.brand + " " + actualVehicle.modelo}
             </p>
             <p>
+              <strong>Kilómetros:</strong> {actualVehicle.kilometers + " km."}
+            </p>
+            <p>
+              <strong>Motor:</strong> {actualVehicle.engine}
+            </p>
+            <p>
               <strong>Falla:</strong> {actualOrder.failure}
             </p>
             <p>
@@ -130,15 +163,17 @@ const OrderDetail = ({ order, onClose, fetchOrders }) => {
             <p>
               <strong>Orden creada por:</strong> {actualOrder.createdBy}
             </p>
-            <button
-              onClick={() => {
-                setIsEditing(true);
-              }}
-              className="flex mt-2 p-2 text-sm font-medium rounded bg-green-600 text-white hover:bg-[#1a7742] hover:text-white"
-            >
-              Editar
-              <PencilSquareIcon className="ml-1 w-5 h-5" />
-            </button>
+            {order.status !== "Retirado" && order.status !== "Terminado" && (
+              <button
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+                className="flex mt-2 p-2 text-sm font-medium rounded bg-green-600 text-white hover:bg-[#1a7742] hover:text-white"
+              >
+                Editar
+                <PencilSquareIcon className="ml-1 w-5 h-5" />
+              </button>
+            )}
           </>
         )}
       </div>

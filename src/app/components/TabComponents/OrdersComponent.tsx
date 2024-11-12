@@ -154,7 +154,7 @@ const OrdersComponent = () => {
                           <EyeIcon className="w-5 h-5" />
                         </button>
                         <SendOrderButton order={item} />
-                        <StatusSelect order={item} />
+                        <StatusSelect order={item} fetchOrders={fetchOrders} />
                       </td>
                     </tr>
                   ))}
@@ -168,7 +168,6 @@ const OrdersComponent = () => {
         <OrderDetail
           order={selectedOrder}
           onClose={() => setSelectedOrder(null)}
-          fetchOrders={fetchOrders}
         />
       )}
     </>
