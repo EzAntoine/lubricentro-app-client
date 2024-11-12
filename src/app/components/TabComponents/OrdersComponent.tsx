@@ -125,7 +125,7 @@ const OrdersComponent = () => {
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"></th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 min-h-screen">
+                <tbody className="divide-y divide-gray-200 min-h-screen max-w-full">
                   {ordersFiltered.map((item) => (
                     <tr key={item._id}>
                       <td className="px-3 py-4 whitespace-nowrap">
@@ -135,13 +135,17 @@ const OrdersComponent = () => {
                         {new Date(item.date).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.clientName}
+                        {item.clientName.length > 35
+                          ? item.clientName.slice(0, 35) + "..."
+                          : item.clientName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {`[ ${item.vehiclePlate} ]`}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.failure}
+                        {item.failure.length > 35
+                          ? item.failure.slice(0, 35) + "..."
+                          : item.failure}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {"$ " + item.price}

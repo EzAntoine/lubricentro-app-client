@@ -126,7 +126,9 @@ const ClientsComponent = () => {
                         {item.email}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.detail}
+                        {item.detail.length > 45
+                          ? item.detail.slice(0, 45) + "..."
+                          : item.detail}
                       </td>
                       <td className="flex justify-end mx-auto mr-4">
                         <button
